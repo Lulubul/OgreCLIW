@@ -65,12 +65,7 @@ jQuery(document).ready(function ($) {
  //    }
 
     //jQuery.getJSON('http://websitescraper.heroku.com/?url=http://ichart.finance.yahoo.com/table.csv?s=RIL.BO&callback=?', function (csvdata) {
-    
-
-
-	
-	
-	
+    	
 });
 
 

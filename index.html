@@ -28,14 +28,16 @@
 <body>
     <header class="container">
         <h1>ogrE</h1>
-        <p>Infographics Web Editor</p></header>
+        <p>Infographics Web Editor</p>
+    </header>
+
     <div id="container" class="container">
         <div class="inner-block">
             <div id="block-left">
                 <div id="left-menu"><span></span><span></span><span></span></div>
                 <article id="menu">
                     <h3>Infographic menu</h3>
-                    <section> 
+                    <section id="infoMenu"> 
                         <ul>
                             <li><button>Încarcă</button></li>
                             <li><button>Fundal</button></li>
@@ -97,7 +99,7 @@
                         </div>
                         <button class="create_chart">Create Chart</button>
                     </section>
-                    <h3>Infographic menu</h3>
+                    <h3>Add photo</h3>
                     <section></section>
                 </article>
             </div>
@@ -126,6 +128,21 @@
                         <label for="height">Height: </label>
                         <input type="text" id="height" readonly style="border:0; color:#f6931f; font-weight:bold;">
                     </div>
+
+                    <select>
+                        <option style="font-family: 'Comic Sans MS'">Comic Sans MS</option>
+                        <option style="font-family: Arial">Arial</option>
+                        <option style="font-family: 'Times New Roman'">Times New Roman</option>
+                        <option style="font-family: 'Verdana'">Verdana</option>
+                        <option style="font-family: 'Impact'">Impact</option>
+                        <option style="font-family: 'Courier'">Courier</option>
+                    </select>
+
+                    <p> Italic </p>
+
+                    <p> Font size </p>
+
+
                 </section>
 
                 <section id="infographic">
@@ -235,6 +252,8 @@
                 </section>
             </article>
     </div>
-    <footer></footer>
+    <footer>
+
+    </footer>
 </body>
 </html>

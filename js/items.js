@@ -45,7 +45,7 @@ Items = {
               //Items.select($(this));
           },
           drag: function() {
-              //$( "#contextmenu" ).appendTo($("#mini"));
+              $( "#contextmenu" ).appendTo($("#mini"));
           },
           stop: function() {
               //$(this).removeAttr( "id" );
@@ -115,7 +115,12 @@ $( document ).ready(function() {
         e.preventDefault();
         e.stopPropagation();
         // create and show menu
-        $( "#contextmenu" ).prependTo( $(this) );
+        relativeX = e.pageX;
+        relativeY = e.pageY;
+
+        $( "#contextmenu" ).prependTo( 'body' );
+        $( "#contextmenu" ).css("left", relativeX);
+        $( "#contextmenu" ).css("top", relativeY);
     });
 
     $('#flipH').click(function() {
@@ -126,9 +131,6 @@ $( document ).ready(function() {
         selectedItem.children().toggleClass('flip-vertical');
     });
 
-    $('.textItem').dblclick(function() {
-      alert('db');
-    });
 
     $( "#mCut" ).click(function() {
         ContextMenu.Cut();
@@ -192,3 +194,5 @@ ContextMenu = {
       $( "#mUnlock" ).css("display", "none");     
     },
 }
+
+
