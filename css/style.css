@@ -203,6 +203,7 @@ header p {
 	border-style: solid;
     border-color: gray;
     z-index: 99;
+    overflow: visible;
 }
 
 .jqcontextmenu div {
