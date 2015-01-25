@@ -1,4 +1,10 @@
-jQuery(document).ready(function ($) {
+jQuery(document).ready(function ($){
+	Chart.Initial();
+});
+
+
+var Chart = {};
+Chart.Initial = function () {
 
 	$( "#menu" ).accordion({
       	collapsible: true,
@@ -8,18 +14,63 @@ jQuery(document).ready(function ($) {
 
     $('#block-left .charts').scrollbar();
 
-	$('#block-left #left-menu').on('click', function(){
+    $('#block-left #left-menu').on('click', function(){
 		$('#block-left').toggleClass('open', 300);
 	});
 
+	$('.chart_type').on('click', function(){
+		$('.chart_type').removeClass('selected');
+		$(this).addClass('selected');
+	});   
+
+	document.querySelector('.upload_local_data').addEventListener('click', function(evt) {
+		Chart.readLocalFile();
+	}, false);
+
 	$('.upload_web_data').on('click', function(){
-		dataUrl = jQuery('#data_url').val();
-		// data_url = jQuery('.data_url').val();
-		console.log(dataUrl);
-		// data = httpGet(data_url);
-		// console.log(data);
-		jQuery.getJSON('http://websitescraper.heroku.com/?url=' + dataUrl + '&callback=?', function (csvdata) {
-			// console.log(csvdata);
+		Chart.parseData();		
+	});
+
+	$('.create_chart').on('click', function(){
+		Chart.xAxis = $('.x_axis').val();
+		Chart.yAxis = $('.y_axis').val();
+		Chart.chartType = $('.chart_type.selected').data();
+		if (Chart.chartType.type == 'dimple.plot.bar')
+			Chart.chartType.type = dimple.plot.bar;
+		if (Chart.chartType.type == 'dimple.plot.area')
+			Chart.chartType.type = dimple.plot.area;
+		if (Chart.chartType.type == 'dimple.plot.pie')
+			Chart.chartType.type = dimple.plot.pie;
+		$('#infographic .part.active .block .items').append('<div class="chart ui-widget draggble"></div>');
+		urlPath = '#infographic .part.active .block .items .chart:last-child';
+		console.log(urlPath);
+		console.log(chartType.type + " " + xAxis + " " + yAxis);
+		Chart.createChart(urlPath, Chart.chartType.type, Chart.xAxis, Chart.yAxis, Chart.dataUrl, 400, 300);
+	});	
+}
+
+Chart.parseData = function() {
+	if (Chart.dataUrl){
+		if (Chart.dataUrl.search('tsv')) {
+			console.log(Chart.dataForChart);
+			// var tsv = $.tsv.parseRows(Chart.dataForChart);
+  	// 		var colHeaders = tsv[0]; // Assuming it has a header row
+  	// 		var firstRow = tsv[1];   // you have to know or guess.
+			// console.log(colHeaders);
+			// console.log(firstRow);
+			// console.log(tsv);
+		} 
+		else if (Chart.dataUrl.search('csv')) {
+		
+		}
+		else if (Chart.dataUrl.search('json')) {
+
+		}
+	} else {
+		Chart.dataUrl = jQuery('#data_url').val();
+		console.log(Chart.dataUrl);
+
+		jQuery.getJSON('http://websitescraper.heroku.com/?url=' + Chart.dataUrl + '&callback=?', function (csvdata) {
 			data = $.csvIn.toJSON(csvdata);
 			// console.log(data[0]);
 			// console.log(data);
@@ -30,84 +81,84 @@ jQuery(document).ready(function ($) {
 			    }));
 			});
 		});
-	});
-
-	$('.create_chart').on('click', function(){
-		xAxis = $('.x_axis').val();
-		yAxis = $('.y_axis').val();
-		chartType = $('.chart_type.selected').data();
-		if (chartType.type == 'dimple.plot.bar')
-			chartType.type = dimple.plot.bar;
-		if (chartType.type == 'dimple.plot.area')
-			chartType.type = dimple.plot.area;
-		if (chartType.type == 'dimple.plot.pie')
-			chartType.type = dimple.plot.pie;
-		$('#infographic .part.active .block .items').append('<div class="chart ui-widget draggble"></div>');
-		urlPath = '#infographic .part.active .block .items .chart:last-child';
-		console.log(urlPath);
-		console.log(chartType.type + " " + xAxis + " " + yAxis);
-		createChart(urlPath, chartType.type, xAxis, yAxis, dataUrl, 400, 300);
-	});
-
-	$('.chart_type').on('click', function(){
-		$('.chart_type').removeClass('selected');
-		$(this).addClass('selected');
-	});
-
- //	   var txtFile = new XMLHttpRequest();
- //    txtFile.open("GET", "http://ichart.finance.yahoo.com/table.csv?s=RIL.BO", true);
- //    txtFile.onreadystatechange = function() {
- //      	if (txtFile.readyState === 4) {  // Makes sure the document is ready to parse.
- //        	if (txtFile.status === 200) {  // Makes sure it's found the file.
- //         		allText = txtFile.responseText;
- //          		lines = txtFile.responseText.split("\n"); // Will separate each line into an array
- //          		console.log(allText);
- //        	}
- //      	}
- //    }
-
-    //jQuery.getJSON('http://websitescraper.heroku.com/?url=http://ichart.finance.yahoo.com/table.csv?s=RIL.BO&callback=?', function (csvdata) {
-    	
-});
-
-
-
-function httpGet(theUrl)
-{
-    var xmlHttp = null;
-
-    xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", theUrl, false );
-    xmlHttp.send( null );
-    return xmlHttp.responseText;
+	}
 }
 
-function createChart(urlPath, chartType, xAxis, yAxis, dataUrl, chartWidth, chartHeight){
+Chart.readLocalFile = function() {
+    var files = document.getElementById('files').files;
+    if (!files.length) {
+      	alert('Please select a file!');
+      	return;
+    }
+
+    var file = files[0];
+    var start = 0;
+    var stop = file.size - 1;
+    Chart.dataUrl = file.name;
+    var reader = new FileReader();
+
+    // If we use onloadend, we need to check the readyState.
+    reader.onloadend = function(evt) {
+      	if (evt.target.readyState == FileReader.DONE) { // DONE == 2
+        	Chart.dataForChart = evt.target.result;
+        	console.log(Chart.dataForChart);
+      	}
+    };
+    reader.readAsText(file);
+    Chart.parseData();
+}
+
+Chart.createChart = function (urlPath, chartType, xAxis, yAxis, dataUrl, chartWidth, chartHeight) {
 	//var svg = dimple.newSvg("#chartContainer", 590, 400);
 	var svg = dimple.newSvg(urlPath, chartWidth, chartHeight);
-	// d3.tsv("../data/example_data.tsv", function (data) {
-	d3.csv(dataUrl, function (data) {
-	// d3.csv("http://ichart.finance.yahoo.com/table.csv", function (data){  
+	
+	if (Chart.dataUrl.search('tsv')) {
+		d3.tsv(data, function (data) {
+			var myChart = new dimple.chart(svg, data);
+		 	myChart.setBounds(60, 30, chartWidth-85, chartHeight-95 );
+		 	var x = myChart.addCategoryAxis("x", xAxis);
+		 	x.addOrderRule("year");
+		  	myChart.addMeasureAxis("y", yAxis);
+		  	var s = myChart.addSeries(null, chartType);
+		  	myChart.addLegend(60, 10, 500, 20, "right");
+		  	myChart.draw();
+		});
+	}
+	else if (Chart.dataUrl.search('csv')){
+		d3.csv(data, function (data) {
+		// d3.csv("http://ichart.finance.yahoo.com/table.csv", function (data){  
 
-	  // data = dimple.filterData(data, "Owner", ["Aperture", "Black Mesa"])
-	  var myChart = new dimple.chart(svg, data);
-	  myChart.setBounds(60, 30, chartWidth-85, chartHeight-95 );
-	  // myChart.setBounds(60, 30, 505, 305);
+		  // data = dimple.filterData(data, "Owner", ["Aperture", "Black Mesa"])
+		  var myChart = new dimple.chart(svg, data);
+		  myChart.setBounds(60, 30, chartWidth-85, chartHeight-95 );
+		  // myChart.setBounds(60, 30, 505, 305);
 
-	  var x = myChart.addCategoryAxis("x", xAxis);
-	  //x.addOrderRule(['Jan', 'Feb', 'Mar', 'Apr']);
-	  x.addOrderRule("year");
-	  myChart.addMeasureAxis("y", yAxis);
-	  var s = myChart.addSeries(null, chartType);
-	  myChart.addLegend(60, 10, 500, 20, "right");
+		  var x = myChart.addCategoryAxis("x", xAxis);
+		  //x.addOrderRule(['Jan', 'Feb', 'Mar', 'Apr']);
+		  x.addOrderRule("year");
+		  myChart.addMeasureAxis("y", yAxis);
+		  var s = myChart.addSeries(null, chartType);
+		  myChart.addLegend(60, 10, 500, 20, "right");
 
-	  // var x = myChart.addCategoryAxis("x", "Month");
-	  // x.addOrderRule("Date");
-	  // myChart.addMeasureAxis("y", "Unit Sales");
-	  // var s = myChart.addSeries("Channel", dimple.plot.area);
-	  // myChart.addLegend(60, 10, 500, 20, "right");
-	  myChart.draw();
-	});
-
+		  // var x = myChart.addCategoryAxis("x", "Month");
+		  // x.addOrderRule("Date");
+		  // myChart.addMeasureAxis("y", "Unit Sales");
+		  // var s = myChart.addSeries("Channel", dimple.plot.area);
+		  // myChart.addLegend(60, 10, 500, 20, "right");
+		  myChart.draw();
+		});
+	}
+	else if(Chart.dataUrl.search('json')){
+		d3.json(data, function (data) {
+			var myChart = new dimple.chart(svg, data);
+		 	myChart.setBounds(60, 30, chartWidth-85, chartHeight-95 );
+		 	var x = myChart.addCategoryAxis("x", xAxis);
+		 	x.addOrderRule("year");
+		  	myChart.addMeasureAxis("y", yAxis);
+		  	var s = myChart.addSeries(null, chartType);
+		  	myChart.addLegend(60, 10, 500, 20, "right");
+		  	myChart.draw();
+		});
+	}
 	Items.initialization();
 }
