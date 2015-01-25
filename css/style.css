@@ -303,17 +303,28 @@ header p {
 	display: block;
 }
 
-=======
 #block-left {width:300px; top: -150px;left: -330px;float:left; z-index:100;position:absolute; margin-left:0px; background-color:#dfdfdf; border-bottom-right-radius: 4px;border-top-right-radius: 4px; padding:15px;}
 #block-left #left-menu {display: block;position: absolute;left: 330px;top: 60px;background-color: #dfdfdf;border-top-right-radius: 4px;border-bottom-right-radius: 4px;padding: 5px;}
 #block-left #left-menu span {width:21px; height:3px; margin:3px; background-color:#000000;display: block;}
->>>>>>> origin/pr/4
 #block-left.open {left:0;}
 .inner-block {position:relative;}
 .container {position:relative;}
 
 #block-left .charts {height:500px;}
-<<<<<<< HEAD
+#block-left .charts li img {
+	width:100px; 
+	height:auto; 
+	margin:4px;
+	border:1px solid transparent;
+}
+
+#block-left .charts li img.selected {
+	border:1px solid #333333;
+}
+
+#block-left .ui-accordion .ui-accordion-content{
+	padding: 15px 10px;
+}
 
 ul
 {
