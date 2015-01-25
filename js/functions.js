@@ -23,6 +23,10 @@ Chart.Initial = function () {
 		$(this).addClass('selected');
 	});   
 
+	document.querySelector('.upload_local_image').addEventListener('click', function(evt) {
+		Chart.loadImages();
+	}, false);
+
 	document.querySelector('.upload_local_data').addEventListener('click', function(evt) {
 		Chart.readLocalFile();
 	}, false);
@@ -48,7 +52,7 @@ Chart.Initial = function () {
 		Chart.urlPath = '#infographic .part.active .block .items .chart:last-child';
 		
 		console.log(Chart.urlPath);
-		console.log(Chart.chartType.type + " " + Chart.xAxis + " " + Chart.yAxis);
+		console.log(Chart.chartType + " " + Chart.xAxis + " " + Chart.yAxis);
 		
 		Chart.createChart();
 	});	
@@ -101,7 +105,7 @@ Chart.readLocalFile = function() {
     var file = files[0];
     var start = 0;
     var stop = file.size - 1;
-    Chart.dataUrl = file.name;
+    Chart.dataUrl = '../data_files/'+file.name;
     var reader = new FileReader();
 
     // If we use onloadend, we need to check the readyState.
@@ -117,9 +121,16 @@ Chart.readLocalFile = function() {
 Chart.createChart = function () {
 	//var svg = dimple.newSvg("#chartContainer", 590, 400);
 	var svg = dimple.newSvg(Chart.urlPath, Chart.chartWidth, Chart.chartHeight);
-	
+	console.log(Chart.dataUrl);
+	console.log(Chart.xAxis);
+	console.log(Chart.yAxis);
+	console.log(Chart.chartHeight);
+	console.log(Chart.chartWidth);
+	console.log(Chart.chartType);
 	if (Chart.dataUrl.search('tsv')) {
-		d3.tsv(Chart.dataForChart, function (data) {
+		d3.tsv("../data_files/example_data.tsv", function (data) {
+		// d3.tsv(Chart.dataUrl, function (data) {
+			console.log(data);
 			var myChart = new dimple.chart(svg, data);
 		 	myChart.setBounds(60, 30, chartWidth-85, Chart.chartHeight-95 );
 		 	var x = myChart.addCategoryAxis("x", Chart.xAxis);
@@ -167,4 +178,16 @@ Chart.createChart = function () {
 		});
 	}
 	Items.initialization();
+}
+
+Chart.loadImages = function () {
+	var files = document.getElementById('uploaded_image').files;
+    if (!files.length) {
+      	alert('Please select a file!');
+      	return;
+    }
+
+    var file = files[0];
+    Chart.imageUrl = 'images/vectors/' + file.name;
+    $('#loaded_images').append('<img class="loaded_image" style="width:100px; height:auto;" id="" src="'+ Chart.imageUrl +'" />');
 }
