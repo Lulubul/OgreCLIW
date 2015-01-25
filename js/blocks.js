@@ -26,6 +26,10 @@ $( document ).ready(function() {
         MiniMenu.Add();
     });
 
+    $("#settings").click(function() {
+        MiniMenu.Settings();
+    });
+
     var selectBlock = function(event) {
         Items.reset();
         $("#miniMenu").css("display", "block");
@@ -34,6 +38,9 @@ $( document ).ready(function() {
         selectedBlock.addClass('active');
         selectedBlock.prepend($("#miniMenu"));
         selectedBlock.children(".block").children(".hover-content").addClass("selected");
+
+        var offset = selectedBlock.offset();
+        $("#itemMenu").css("top", offset.top - 250);
     };
 
     $(document).delegate('.block', 'click', function (event) {
@@ -50,6 +57,16 @@ $( document ).ready(function() {
 
     });
 
+    $("#incarca").click(function() {
+        var file;
+        MainMenu.Load(file);
+    });
+
+     $("#salveaza").click(function() {
+        MainMenu.Save();
+    });
+    
+
 });
 
 MiniMenu = {
@@ -61,13 +78,13 @@ MiniMenu = {
         selectedBlock.insertBefore(selectedBlock.prev());
     },
     Clone: function() {
-           var newBlock = selectedBlock.clone();
-           newBlock.find('div:first').remove();
-           newBlock.children(".block").children(".hover-content").removeClass("selected");
-           newBlock.appendTo( "#infographic" );
-           newBlock.insertAfter( selectedBlock );
-           Items.reset();
-           Items.initialization();
+        var newBlock = selectedBlock.clone();
+        newBlock.find('div:first').remove();
+        newBlock.children(".block").children(".hover-content").removeClass("selected");
+        newBlock.appendTo( "#infographic" );
+        newBlock.insertAfter( selectedBlock );
+        Items.reset();
+        Items.initialization();
     },
     Delete: function() {
         $("#mini").prepend($("#miniMenu"));
@@ -76,23 +93,28 @@ MiniMenu = {
         selectedBlock = -1;
     },
     Add: function() {
-       $('<div class="part"> <div class="block"> <div class="hover-content"> <div class="info"> <p> Selectează </p> </div></div> </div> </div>').insertAfter(selectedBlock);
+        $('<div class="part"> <div class="block"> <div class="hover-content"> <div class="info"> <p> Selectează </p> </div></div> </div> </div>').insertAfter(selectedBlock);
+    },
+    Settings: function(){
+        var toggleWidth = $("#settingsContainer").height() == 100 ? "0px" : "100px";
+        $('#settingsContainer').animate({ height: toggleWidth });
+
+        $('#widthBlock').val(selectedBlock.find('.block').width() + "px." );
+        $('#heightBlock').val(selectedBlock.find('.block').height() + "px." );
     }
 }
-
 
 MainMenu = {
     Save: function() {
         html2canvas($("#infographic"), {
             onrendered: function(canvas) {
-                // canvas is the final rendered <canvas> element
                 var myImage = canvas.toDataURL("image/png");
                 window.open(myImage);
             }
         });
     },
-    Load: function() {
-
+    Load: function(file) {
+        alert('fisier');
     }
 }
 

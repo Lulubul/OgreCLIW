@@ -35,16 +35,24 @@
     <div id="container" class="container">
         <div class="inner-block">
             <div id="block-left">
-                <div id="left-menu"><span></span><span></span><span></span></div>
+                <div id="left-menu">
+                    <span>
+                    </span>
+                    <span>
+                    </span>
+                    <span>
+                    </span>
+                </div>
                 <article id="menu">
                     <h3>Infographic menu</h3>
                     <section id="infoMenu"> 
                         <ul>
-                            <li><button>Încarcă</button></li>
-                            <li><button>Fundal</button></li>
-                            <li><button>Text</button></li>
-                            <li><button>Unelte</button></li>
-                            <li><button>Salveaza</button></li>
+                            <li>
+                                <button id="incarca">Încarcă</button>
+                            </li>
+                            <li>
+                                <button id="salveaza">Salveaza</button>
+                            </li>
                         </ul>
                     </section>
                     <h3>Add Chart</h3>
@@ -53,11 +61,15 @@
                             <div class="upload_data">
                                 <div class="upload_local">
                                     <input type="file" id="files" name="file" />
-                                    <div class="upload_local_data"><button><span>Load data</span></button></div>
+                                    <div class="upload_local_data">
+                                    <button><span>Load data</span></button>
+                                    </div>
                                 </div>
                                 <div class="upload_web">
                                     <input type="text" id="data_url" placeholder="Write URL here">
-                                    <button class="upload_web_data"><span>Load data</span></button>
+                                    <button class="upload_web_data">
+                                        <span>Load data</span>
+                                    </button>
                                 </div>
                             </div>
                             <div class="">
@@ -114,7 +126,11 @@
                     <section>
                         <div class="upload_image">
                             <input type="file" id="uploaded_image" name="image" />
-                            <div class="upload_local_image"><button><span>Load Image</span></button></div>
+                            <div class="upload_local_image">
+                                <button>
+                                    <span>Load Image</span>
+                                </button>
+                            </div>
                         </div>
                         <div id="loaded_images" class="">
                         </div>
@@ -125,41 +141,45 @@
 
             <article>
                 <section id="itemMenu">
-                    <label for="amount">Alpha:</label>
-                    <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-                    <div id="slider-1"></div>
+                    
+                    <div id="imageEditor">
+                        <label for="amount">Alpha:</label>
+                        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                        <div id="slider-1"></div>
 
-                    <div id="flipH"> 
-                        <img src="images/flipH.png" alt="flipHorizontal" />
+                        <div id="flipH"> 
+                            <img src="images/flipH.png" alt="flipHorizontal" />
+                        </div>
+
+                        <div id="flipV"> 
+                            <img src="images/flipV.png" alt="flipVertical" />
+                        </div>
+
+                        <div id="widthItem"> 
+                            <label for="width">Width: </label>
+                            <input type="text" id="width" readonly style="border:0; color:#f6931f; font-weight:bold;"> 
+                        </div>
+
+                        <div id="heightItem"> 
+                            <label for="height">Height: </label>
+                            <input type="text" id="height" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                        </div>
                     </div>
 
-                    <div id="flipV"> 
-                        <img src="images/flipV.png" alt="flipVertical" />
+                    <div id="textEditor" style="visibility: hidden">
+                        <select>
+                            <option style="font-family: 'Comic Sans MS'">Comic Sans MS</option>
+                            <option style="font-family: Arial">Arial</option>
+                            <option style="font-family: 'Times New Roman'">Times New Roman</option>
+                            <option style="font-family: 'Verdana'">Verdana</option>
+                            <option style="font-family: 'Impact'">Impact</option>
+                            <option style="font-family: 'Courier'">Courier</option>
+                        </select>
+
+                        <p> Italic </p>
+                        <p> Font size </p>
+
                     </div>
-
-                    <div id="widthItem"> 
-                        <label for="width">Width: </label>
-                        <input type="text" id="width" readonly style="border:0; color:#f6931f; font-weight:bold;"> 
-                    </div>
-
-                    <div id="heightItem"> 
-                        <label for="height">Height: </label>
-                        <input type="text" id="height" readonly style="border:0; color:#f6931f; font-weight:bold;">
-                    </div>
-
-                    <select>
-                        <option style="font-family: 'Comic Sans MS'">Comic Sans MS</option>
-                        <option style="font-family: Arial">Arial</option>
-                        <option style="font-family: 'Times New Roman'">Times New Roman</option>
-                        <option style="font-family: 'Verdana'">Verdana</option>
-                        <option style="font-family: 'Impact'">Impact</option>
-                        <option style="font-family: 'Courier'">Courier</option>
-                    </select>
-
-                    <p> Italic </p>
-
-                    <p> Font size </p>
-
 
                 </section>
 
@@ -235,7 +255,22 @@
                         <div id="add"> 
                             <img src="images/add.png" alt="add" />
                         </div>
+                        <div id="settings">
+                            <img src="images/settings.png" alt="settings" />
+                        </div>
+                        <span id="settingsContainer">
+                            <span> 
+                                <label for="widthBlock">Width: </label>
+                                <input type="text" id="widthBlock" readonly style="border:0; color:#f6931f; font-weight:bold;"> 
+                            </span>
+
+                            <span> 
+                                <label for="heightBlock">Height: </label>
+                                <input type="text" id="heightBlock" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                            </span>
+                        </span>
                     </div>
+
 
                     <div id="contextmenu" class="jqcontextmenu">
                         <div id="mCut"> 

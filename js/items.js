@@ -1,5 +1,5 @@
  
-
+/*
 function Item(loc, sizeX, sizeY, rotation, zIn, position, alpha) {  
   this.loc = loc;
   this.sizeX = sizeX;
@@ -22,7 +22,7 @@ Item.prototype.getSizeY = function () {
 };
 Item.prototype.toString = function () { // suprascriere
   return '<Item>' + this.loc () + '</Item>';
-};
+};*/
 
 
 var selectedItem = -1;
@@ -61,9 +61,21 @@ Items = {
         selectedItem = newItem;
         newItem.attr('id', 'drag');
 
-        if (!newItem.hasClass("textItem")) {
+        if (!newItem.hasClass("textItem"))
+        {
+          $('#textEditor').css('visibility','hidden');
+          $('#textEditor').css('height','0px');
+          $('#imageEditor').css('visibility','visible');
+          $('#imageEditor').css('height','150px');
           $('#width').val(newItem.children('img').width() + "px." );
           $('#height').val(newItem.children('img').height() + "px.");
+        }
+        else 
+        {
+          $('#imageEditor').css('visibility','hidden');
+          $('#imageEditor').css('height','0px');
+          $('#textEditor').css('visibility','visible');
+          $('#textEditor').css('height','150px');
         }
 
         $( "#amount" ).val( newItem.children('img').css('opacity') );
@@ -130,7 +142,6 @@ $( document ).ready(function() {
     $('#flipV').click(function() {
         selectedItem.children().toggleClass('flip-vertical');
     });
-
 
     $( "#mCut" ).click(function() {
         ContextMenu.Cut();
