@@ -34,6 +34,9 @@ Chart.Initial = function () {
 	$('.create_chart').on('click', function(){
 		Chart.xAxis = $('.x_axis').val();
 		Chart.yAxis = $('.y_axis').val();
+		Chart.chartWidth = $('#chartWidth').val();
+		Chart.chartHeight = $('#chartHeight').val();
+
 		Chart.chartType = $('.chart_type.selected').data();
 		if (Chart.chartType.type == 'dimple.plot.bar')
 			Chart.chartType.type = dimple.plot.bar;
@@ -42,23 +45,27 @@ Chart.Initial = function () {
 		if (Chart.chartType.type == 'dimple.plot.pie')
 			Chart.chartType.type = dimple.plot.pie;
 		$('#infographic .part.active .block .items').append('<div class="chart ui-widget draggble"></div>');
-		urlPath = '#infographic .part.active .block .items .chart:last-child';
-		console.log(urlPath);
-		console.log(chartType.type + " " + xAxis + " " + yAxis);
-		Chart.createChart(urlPath, Chart.chartType.type, Chart.xAxis, Chart.yAxis, Chart.dataUrl, 400, 300);
+		Chart.urlPath = '#infographic .part.active .block .items .chart:last-child';
+		
+		console.log(Chart.urlPath);
+		console.log(Chart.chartType.type + " " + Chart.xAxis + " " + Chart.yAxis);
+		
+		Chart.createChart();
 	});	
 }
 
 Chart.parseData = function() {
 	if (Chart.dataUrl){
 		if (Chart.dataUrl.search('tsv')) {
-			console.log(Chart.dataForChart);
-			// var tsv = $.tsv.parseRows(Chart.dataForChart);
-  	// 		var colHeaders = tsv[0]; // Assuming it has a header row
-  	// 		var firstRow = tsv[1];   // you have to know or guess.
-			// console.log(colHeaders);
-			// console.log(firstRow);
-			// console.log(tsv);
+			// console.log(Chart.dataForChart);
+			var tsv = $.tsv.parseRows(Chart.dataForChart);
+  			var colHeaders = tsv[0]; // Assuming it has a header row
+  			$.each(colHeaders, function(index, value){
+				$('#x_axis, #y_axis').append($('<option>', { 
+			        value: value,
+			        text : value 
+			    }));
+			});
 		} 
 		else if (Chart.dataUrl.search('csv')) {
 		
@@ -101,25 +108,24 @@ Chart.readLocalFile = function() {
     reader.onloadend = function(evt) {
       	if (evt.target.readyState == FileReader.DONE) { // DONE == 2
         	Chart.dataForChart = evt.target.result;
-        	console.log(Chart.dataForChart);
+        	Chart.parseData();
       	}
     };
     reader.readAsText(file);
-    Chart.parseData();
 }
 
-Chart.createChart = function (urlPath, chartType, xAxis, yAxis, dataUrl, chartWidth, chartHeight) {
+Chart.createChart = function () {
 	//var svg = dimple.newSvg("#chartContainer", 590, 400);
-	var svg = dimple.newSvg(urlPath, chartWidth, chartHeight);
+	var svg = dimple.newSvg(Chart.urlPath, Chart.chartWidth, Chart.chartHeight);
 	
 	if (Chart.dataUrl.search('tsv')) {
-		d3.tsv(data, function (data) {
+		d3.tsv(Chart.dataForChart, function (data) {
 			var myChart = new dimple.chart(svg, data);
-		 	myChart.setBounds(60, 30, chartWidth-85, chartHeight-95 );
-		 	var x = myChart.addCategoryAxis("x", xAxis);
-		 	x.addOrderRule("year");
-		  	myChart.addMeasureAxis("y", yAxis);
-		  	var s = myChart.addSeries(null, chartType);
+		 	myChart.setBounds(60, 30, chartWidth-85, Chart.chartHeight-95 );
+		 	var x = myChart.addCategoryAxis("x", Chart.xAxis);
+		 	// x.addOrderRule("year");
+		  	myChart.addMeasureAxis("y", Chart.yAxis);
+		  	var s = myChart.addSeries(null, Chart.chartType);
 		  	myChart.addLegend(60, 10, 500, 20, "right");
 		  	myChart.draw();
 		});
@@ -137,7 +143,7 @@ Chart.createChart = function (urlPath, chartType, xAxis, yAxis, dataUrl, chartWi
 		  //x.addOrderRule(['Jan', 'Feb', 'Mar', 'Apr']);
 		  x.addOrderRule("year");
 		  myChart.addMeasureAxis("y", yAxis);
-		  var s = myChart.addSeries(null, chartType);
+		  var s = myChart.addSeries(null, Chart.chartType);
 		  myChart.addLegend(60, 10, 500, 20, "right");
 
 		  // var x = myChart.addCategoryAxis("x", "Month");
