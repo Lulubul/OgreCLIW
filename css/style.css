@@ -56,7 +56,7 @@ header p {
 }
 
 .part {
-	width: 850px;
+	width: 800px;
 	height: 300px;
 	margin-left: auto;
     margin-right: auto;
@@ -117,7 +117,7 @@ header p {
 
 
 #miniMenu {
-	width: 200px;
+	width: 15px;
 	height: 300px;
 	float: left;
 	display: none;
@@ -161,14 +161,16 @@ header p {
 }
 
 #settings {
-	margin-top: 5px;
+	margin-top: 5px !important;
 	border-top: 5px;
 }
+
 #settingsContainer {
 	width: 140px;
 	height: 0px;
 	overflow: hidden;
 	background: #18E698;
+	display: block;
 }
 
 #up:hover:after {
