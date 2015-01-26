@@ -55,9 +55,18 @@ header p {
 	
 }
 
+.label {
+	display: block;
+	margin-top: 5px;
+	margin-left: 5px;
+}
+
+.textItem {
+	cursor: pointer;
+}
+
 .part {
 	width: 800px;
-	height: 300px;
 	margin-left: auto;
     margin-right: auto;
 }
@@ -69,8 +78,8 @@ header p {
 	left: 0; 
 	position: absolute;
 	background: black;
-	opacity: 0.6;
-    filter: alpha(opacity=60); /* For IE8 and earlier */
+	opacity: 0.8;
+    filter: alpha(opacity=80); /* For IE8 and earlier */
 	display: none;
 	overflow: hidden;
 }
@@ -79,9 +88,11 @@ header p {
     background: white;
 	width: 650px;
 	height: 300px;
-	margin: 2px 0 5px;
+	margin: auto;
+	margin-bottom: 5px;
+	margin-top: 5px;
     position: relative;
-    float: right;
+    display: block;
     overflow: hidden;
     -webkit-box-shadow: 10px 10px 2px 0px rgba(15, 163, 163, 0.3);
     -moz-box-shadow: 10px 10px 2px 0px rgba(15, 163, 163, 0.3);
@@ -117,12 +128,10 @@ header p {
 
 
 #miniMenu {
-	width: 15px;
 	height: 300px;
-	float: left;
 	display: none;
+	position: absolute;
 }
-
 
 #miniMenu div{
 	width: 40px;
@@ -207,6 +216,10 @@ header p {
 }
 
 #mini .jqcontextmenu {
+	display: none;
+}
+
+#mini .sideMenu{
 	display: none;
 }
 
@@ -465,3 +478,37 @@ ul
 }
 
 #chart_sets .bar_charts, #chart_sets .pie_charts {display:none;} 
+
+
+/* Color picker */
+a {
+  color: #39C;
+  font-weight: 400;
+}
+a:hover {
+  color: #FF9900;
+}
+a.sel {
+  color: #000;
+  text-decoration: none;
+}
+
+.demoPanel {
+  float: left;
+  margin: 0px;
+  padding: 0px;
+  width: 212px;
+}
+
+#textEditor p {
+  padding: 0px;
+  margin: 0px;
+  font-family: "Verdana";
+}
+
+.demoPanel input {
+  width: 100px;
+}
+
+
+

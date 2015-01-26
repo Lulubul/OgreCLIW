@@ -95,15 +95,14 @@ $( document ).ready(function() {
         }
     });
 
-    //$( "#amount" ).val( $( "#slider-vertical" ).slider( "value" ) );
-
     Items.initialization();
+
+    for (var i= 12; i < 30; i++)
+        $('#fontSize').append($('<option>', {value:i, text:i}));
 
     $(document).on("mousedown", ".draggble" , function() {
       Items.select($(this));
     });
-    //$( ".ui-widget" ).addcontextmenu('contextmenu2');
-    //$( ".items" ).selectable();
 
     // starting position of the divs
     $( document ).mouseup(function() {

@@ -6,6 +6,10 @@ var hover = $('<div class="hover-content"> <div class="info">  <p> Selectați </
 
 $( document ).ready(function() {
 
+    /*color Picker*/
+    $('#cpButton').colorpicker({showOn:'button'});
+    $('a[href="#"]').attr('href', 'javascript:void(0)');
+
     $( "#up" ).click(function() {
         MiniMenu.MoveUp();
     });
@@ -30,17 +34,27 @@ $( document ).ready(function() {
         MiniMenu.Settings();
     });
 
+    $("#change").click(function() {
+        MiniMenu.Change();
+    });
+
     var selectBlock = function(event) {
         Items.reset();
         $("#miniMenu").css("display", "block");
         $('.block .item').removeClass('active');
         selectedBlock = $(event.target).parents('div[class^="part"]');
         selectedBlock.addClass('active');
-        selectedBlock.prepend($("#miniMenu"));
         selectedBlock.children(".block").children(".hover-content").addClass("selected");
 
-        var offset = selectedBlock.offset();
-        $("#itemMenu").css("top", offset.top - 250);
+        var offset = selectedBlock.find('.block').offset();
+        $("#infographic").append($("#itemMenu"))
+        $("#itemMenu").css("top", offset.top - 180);
+        $("#infographic").append($("#miniMenu"));
+        $("#miniMenu").css("top", offset.top - 180);
+        $("#miniMenu").css("left", offset.left - 150);
+
+        $('#widthBlock').val(selectedBlock.find('.block').width());
+        $('#heightBlock').val(selectedBlock.find('.block').height());
     };
 
     $(document).delegate('.block', 'click', function (event) {
@@ -98,9 +112,12 @@ MiniMenu = {
     Settings: function(){
         var toggleWidth = $("#settingsContainer").height() == 100 ? "0px" : "100px";
         $('#settingsContainer').animate({ height: toggleWidth });
-
-        $('#widthBlock').val(selectedBlock.find('.block').width() + "px." );
-        $('#heightBlock').val(selectedBlock.find('.block').height() + "px." );
+    },
+    Change: function() {
+        selectedBlock.find('.block').height($('#heightBlock').val());
+        $('.block').width($('#widthBlock').val());
+        var offset = selectedBlock.find('.block').offset();
+        $("#miniMenu").css("left", offset.left - 150);
     }
 }
 
