@@ -16,6 +16,9 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
+*, *:before, *:after {webkit box sizing: border box;
+						box-sizing: border-box;}
+
 body {
     font-family: 'Lato', Arial, sans-serif;
 	background: url("../images/bg.jpg");
@@ -34,41 +37,66 @@ header {
 	text-align: center;text-shadow: 0px -3px 0px #A1C3B3, 0px 0px -3px #AD4158;
 }
 
-header h1 {
-	color: #FFF;
-	font-weight: 100;
-	font-size: 4.5em;
-	text-transform: uppercase;
-	text-shadow: 5px 0px 0px #8FD4DC, -5px 0px 0px #AD4158;
+.clearfix{
+	clear: both;
+}
+.clearfix:before,
+.clearfix:after {
+	content: "";
+	display: table;
 }
 
-header p {
-	color: #18E698;
-	font-weight: 300;
-	font-size: 1.5em;
-	padding: 0;
-	margin: 0;
+
+#logo {
+	display: inline-block; 
 }
 
+			#title {
+				color: #FFF;
+				font-weight: 100;
+				font-size: 4.5em;
+				text-transform: uppercase;
+				text-shadow: 5px 0px 0px #8FD4DC, -5px 0px 0px #AD4158;
+				margin: 10px;
+			}
+
+			#subtitle {
+				color: #18E698;
+				font-weight: 300;
+				font-size: 1.5em;
+				padding: 0;
+				margin: 0 0 100px 0;
+			}
+
+
+
+#container {
+	display: block;
+}
+
+#container-body {
+	width: 1500px;
+	margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
 
 #infographic {
-	
+	display: inline-block;
+	margin-left: 150px;
+	width: 800px;
+	float: left;
 }
 
-.label {
-	display: block;
-	margin-top: 5px;
-	margin-left: 5px;
-}
 
-.textItem {
-	cursor: pointer;
-}
+
 
 .part {
 	width: 800px;
+	height: 300px;
 	margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20px;
 }
 
 .hover-content {
@@ -78,8 +106,8 @@ header p {
 	left: 0; 
 	position: absolute;
 	background: black;
-	opacity: 0.8;
-    filter: alpha(opacity=80); /* For IE8 and earlier */
+	opacity: 0.6;
+    filter: alpha(opacity=60); /* For IE8 and earlier */
 	display: none;
 	overflow: hidden;
 }
@@ -88,11 +116,10 @@ header p {
     background: white;
 	width: 650px;
 	height: 300px;
-	margin: auto;
-	margin-bottom: 5px;
-	margin-top: 5px;
+	margin: 2px 0 5px;
     position: relative;
-    display: block;
+    margin-left: auto;
+    margin-right: auto;
     overflow: hidden;
     -webkit-box-shadow: 10px 10px 2px 0px rgba(15, 163, 163, 0.3);
     -moz-box-shadow: 10px 10px 2px 0px rgba(15, 163, 163, 0.3);
@@ -126,19 +153,25 @@ header p {
 	background: white;
 }
 
+#mini {
+	display: none;
+	float: left;
+}
 
 #miniMenu {
+	width: 15px;
 	height: 300px;
-	display: none;
-	position: absolute;
+	float: left;
+	display: inline-block;
 }
+
 
 #miniMenu div{
 	width: 40px;
 	height: 40px;
 	display: block;
 	margin: 0;
-	margin-left: 100px;
+	margin-left: 0px;
 	background: #18E698;
 	-webkit-box-shadow: 5px 5px 5px 0px rgba(15, 163, 163, 0.3);
     -moz-box-shadow: 5px 5px 5px 0px rgba(15, 163, 163, 0.3);
@@ -219,10 +252,6 @@ header p {
 	display: none;
 }
 
-#mini .sideMenu{
-	display: none;
-}
-
 .jqcontextmenu {
 	position: absolute;
 	top: 0px;
@@ -275,12 +304,16 @@ header p {
 }
 
 #itemMenu {
-	width: 300px;
-	height: 150px;
+	width: auto;
+	height: auto;
 	background: white;
-	position: absolute;
-	left: 1200px;
-	background-color: #18E698;
+	position: relative;
+	background-color: #E6E6E6;
+	display: inline-block;
+	padding: 15px 20px 15px 15px;
+	border: 3px solid #E6E6E6;
+	border-radius: 8px;
+	box-shadow: 1px 1px 10px inset;
 }
 
 
@@ -365,7 +398,7 @@ header p {
 
 #block-left.open {left:0;}
 .inner-block {position:relative;}
-.container {position:relative;}
+
 
 #block-left #types_charts 
 {
@@ -478,37 +511,3 @@ ul
 }
 
 #chart_sets .bar_charts, #chart_sets .pie_charts {display:none;} 
-
-
-/* Color picker */
-a {
-  color: #39C;
-  font-weight: 400;
-}
-a:hover {
-  color: #FF9900;
-}
-a.sel {
-  color: #000;
-  text-decoration: none;
-}
-
-.demoPanel {
-  float: left;
-  margin: 0px;
-  padding: 0px;
-  width: 212px;
-}
-
-#textEditor p {
-  padding: 0px;
-  margin: 0px;
-  font-family: "Verdana";
-}
-
-.demoPanel input {
-  width: 100px;
-}
-
-
-
