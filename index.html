@@ -55,24 +55,53 @@
                             </li>
                         </ul>
                     </section>
-                    <h3>Add Chart</h3>
+                     <h3>Add Chart</h3>
                     <section>
-                        <div class="chart_editor">
+                        <div class="chart_editor_block" id="chart_data">
                             <div class="upload_data">
-                                <div class="upload_local">
+                                <button id="upload_local">Upload File</button>
+                                <button id="upload_web">Give URL</button>
+                                <div class="upload_block" id="upload_local_block">
                                     <input type="file" id="files" name="file" />
                                     <div class="upload_local_data">
-                                    <button><span>Load data</span></button>
+                                        <button><span>Load data</span></button>
                                     </div>
                                 </div>
-                                <div class="upload_web">
+                                <div class="upload_block" id="upload_web_block">
                                     <input type="text" id="data_url" placeholder="Write URL here">
                                     <button class="upload_web_data">
                                         <span>Load data</span>
                                     </button>
                                 </div>
                             </div>
-                            <div class="">
+                        </div>
+                        <div class="chart_editor_block" id="types_charts">
+                            <ul>
+                                <li><h4>Bar Charts</h4></li>
+                                <li>
+                                    <img class="chart_type" data-type="dimple.plot.bar" id="bar_vertical" src="images/charts/bars_horizontal.jpg">
+                                    <img class="chart_type" data-type="dimple.plot.bar" id="bar_horizontal" src="images/charts/bars_vertical.jpg">
+                                </li>
+                            </ul>
+                            <ul>
+                                <li><h4>Pie Charts</h4></li>
+                                <li><img class="chart_type" data-type="dimple.plot.pie" id="pie_standard" src="images/charts/pie_standard.jpg"></li>
+                            </ul>
+                            <ul>
+                                <li><h4>Area Charts</h4></li>
+                                <li><img class="chart_type" data-type="dimple.plot.area" id="bar_horizontal" src="images/charts/area_steps_horizontal.jpg"></li>
+                            </ul>
+                            <ul>
+                                <li><h4>Line Charts</h4></li>
+                                <li><img class="chart_type" id="bar_horizontal" src="images/charts/area_steps_horizontal.jpg"></li>
+                            </ul>
+                            <ul>
+                                <li><h4>Step Charts</h4></li>
+                                <li><img class="chart_type" id="bar_horizontal" src="images/charts/steps_horizontal.jpg"></li>
+                            </ul>
+                        </div>
+                        <div class="chart_editor_block" id="chart_sets">
+                            <div class="bar_charts">    
                                 <div>
                                     <label for="chartWidth">Set the width of chart in px</label>
                                     <input type="text" id="chartWidth" name="chartWidth" placeholder="For example: 400">
@@ -93,32 +122,41 @@
                                         <option>Please Select ... </option>
                                     </select>
                                 </div>
+                                <div>
+                                    <label for="order_rule">add order rule</span>
+                                    <select name="order_rule" id="order_rule" class="order_rule">
+                                        <option>Please Select ... </option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="series">add series</span>
+                                    <select name="series" id="series" class="series">
+                                        <option>Please Select ... </option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="charts">
-                            <ul>
-                                <li><h4>Bar Charts</h4></li>
-                                <li>
-                                    <img class="chart_type" data-type="dimple.plot.bar" id="bar_horizontal" src="images/charts/bars_horizontal.jpg">
-                                    <img class="chart_type" data-type="dimple.plot.bar" id="bar_horizontal" src="images/charts/bars_vertical.jpg">
-                                </li>
-                            </ul>
-                            <ul>
-                                <li><h4>Pie Charts</h4></li>
-                                <li><img class="chart_type" data-type="dimple.plot.pie" id="pie_standard" src="images/charts/pie_standard.jpg"></li>
-                            </ul>
-                            <ul>
-                                <li><h4>Area Charts</h4></li>
-                                <li><img class="chart_type" data-type="dimple.plot.area" id="bar_horizontal" src="images/charts/area_steps_horizontal.jpg"></li>
-                            </ul>
-                            <ul>
-                                <li><h4>Line Charts</h4></li>
-                                <li><img class="chart_type" id="bar_horizontal" src="images/charts/area_steps_horizontal.jpg"></li>
-                            </ul>
-                            <ul>
-                                <li><h4>Step Charts</h4></li>
-                                <li><img class="chart_type" id="bar_horizontal" src="images/charts/steps_horizontal.jpg"></li>
-                            </ul>
+                            <div class="pie_charts">
+                                <div>
+                                    <label for="chartWidth">Set the width of chart in px</label>
+                                    <input type="text" id="chartWidth" name="chartWidth" placeholder="For example: 400">
+                                </div>
+                                <div>
+                                    <label for="chartHeight">Set the height of chart in px</label>
+                                    <input type="text" id="chartHeight" name="chartHeight" placeholder="For example: 400">
+                                </div>
+                                <div>
+                                    <label for="measure_axis">Set measure axis</label>
+                                    <select name="measure_axis" id="measure_axis" class="measure_axis">
+                                        <option>Please Select ... </option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="series">add series</label>
+                                    <select name="series" id="series" class="series">
+                                        <option>Please Select ... </option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <button class="create_chart">Create Chart</button>
                     </section>

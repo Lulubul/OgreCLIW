@@ -12,7 +12,7 @@ Chart.Initial = function () {
       	active: false
     });
 
-    $('#block-left .charts').scrollbar();
+    $('#block-left #types_charts').scrollbar();
 
     $('#block-left #left-menu').on('click', function(){
 		$('#block-left').toggleClass('open', 300);
@@ -21,7 +21,33 @@ Chart.Initial = function () {
 	$('.chart_type').on('click', function(){
 		$('.chart_type').removeClass('selected');
 		$(this).addClass('selected');
+		Chart.chartType = $('.chart_type.selected').data();
+		if (Chart.chartType.type == 'dimple.plot.bar'){
+			$('#chart_sets .pie_charts').hide();
+			$('#chart_sets .bar_charts').show();
+			// Chart.chartType.type = dimple.plot.bar;
+		}
+		else if (Chart.chartType.type == 'dimple.plot.area'){
+			$('#chart_sets .pie_charts').hide();
+			$('#chart_sets .bar_charts').show();
+			// Chart.chartType.type = dimple.plot.area;
+		}
+		else if (Chart.chartType.type == 'dimple.plot.pie'){
+			$('#chart_sets .bar_charts').hide();
+			$('#chart_sets .pie_charts').show();
+			// Chart.chartType.type = dimple.plot.pie;
+		}
 	});   
+
+	$('.upload_data #upload_local').on('click', function(){
+    	$('.upload_data #upload_web_block').hide();
+    	$('.upload_data #upload_local_block').show();
+    });
+
+    $('.upload_data #upload_web').on('click', function(){
+    	$('.upload_data #upload_local_block').hide();
+    	$('.upload_data #upload_web_block').show();
+    });
 
 	document.querySelector('.upload_local_image').addEventListener('click', function(evt) {
 		Chart.loadImages();
@@ -35,25 +61,7 @@ Chart.Initial = function () {
 		Chart.parseData();		
 	});
 
-	$('.create_chart').on('click', function(){
-		Chart.xAxis = $('.x_axis').val();
-		Chart.yAxis = $('.y_axis').val();
-		Chart.chartWidth = $('#chartWidth').val();
-		Chart.chartHeight = $('#chartHeight').val();
-
-		Chart.chartType = $('.chart_type.selected').data();
-		if (Chart.chartType.type == 'dimple.plot.bar')
-			Chart.chartType.type = dimple.plot.bar;
-		if (Chart.chartType.type == 'dimple.plot.area')
-			Chart.chartType.type = dimple.plot.area;
-		if (Chart.chartType.type == 'dimple.plot.pie')
-			Chart.chartType.type = dimple.plot.pie;
-		$('#infographic .part.active .block .items').append('<div class="chart ui-widget draggble"></div>');
-		Chart.urlPath = '#infographic .part.active .block .items .chart:last-child';
-		
-		console.log(Chart.urlPath);
-		console.log(Chart.chartType + " " + Chart.xAxis + " " + Chart.yAxis);
-		
+	$('.create_chart').on('click', function(){		
 		Chart.createChart();
 	});	
 }
@@ -64,8 +72,11 @@ Chart.parseData = function() {
 			// console.log(Chart.dataForChart);
 			var tsv = $.tsv.parseRows(Chart.dataForChart);
   			var colHeaders = tsv[0]; // Assuming it has a header row
+  			//empty the select boxes
+  			$('#x_axis, #y_axis, #order_rule, #measure_axis, #series').empty();
+  			// $('#series').append($('<option value="none">None</option>'));
   			$.each(colHeaders, function(index, value){
-				$('#x_axis, #y_axis').append($('<option>', { 
+				$('#x_axis, #y_axis, #order_rule, #measure_axis, #series').append($('<option>', { 
 			        value: value,
 			        text : value 
 			    }));
@@ -85,8 +96,10 @@ Chart.parseData = function() {
 			data = $.csvIn.toJSON(csvdata);
 			// console.log(data[0]);
 			// console.log(data);
+			$('#x_axis, #y_axis, #order_rule, #measure_axis, #series').empty();
+			// $('#series').append($('<option value="none">None</option>'));
 			$.each(data[0], function(index, value){
-				$('#x_axis, #y_axis').append($('<option>', { 
+				$('#x_axis, #y_axis, #order_rule, #measure_axis, #series').append($('<option>', { 
 			        value: index,
 			        text : index 
 			    }));
@@ -105,7 +118,7 @@ Chart.readLocalFile = function() {
     var file = files[0];
     var start = 0;
     var stop = file.size - 1;
-    Chart.dataUrl = '../data_files/'+file.name;
+    Chart.dataUrl = '/data_files/'+file.name;
     var reader = new FileReader();
 
     // If we use onloadend, we need to check the readyState.
@@ -120,63 +133,159 @@ Chart.readLocalFile = function() {
 
 Chart.createChart = function () {
 	//var svg = dimple.newSvg("#chartContainer", 590, 400);
+	Chart.chartWidth = 400;
+	// Chart.chartWidth = $('#chartWidth').val();
+	Chart.chartHeight = 300;
+	// Chart.chartHeight = $('#chartHeight').val();
+	$('#infographic .part.active .block .items').append('<div class="chart ui-widget draggble"></div>');
+	Chart.urlPath = '#infographic .part.active .block .items .chart:last-child';
+
 	var svg = dimple.newSvg(Chart.urlPath, Chart.chartWidth, Chart.chartHeight);
-	console.log(Chart.dataUrl);
-	console.log(Chart.xAxis);
-	console.log(Chart.yAxis);
-	console.log(Chart.chartHeight);
-	console.log(Chart.chartWidth);
-	console.log(Chart.chartType);
-	if (Chart.dataUrl.search('tsv')) {
-		d3.tsv("../data_files/example_data.tsv", function (data) {
-		// d3.tsv(Chart.dataUrl, function (data) {
-			console.log(data);
-			var myChart = new dimple.chart(svg, data);
-		 	myChart.setBounds(60, 30, chartWidth-85, Chart.chartHeight-95 );
-		 	var x = myChart.addCategoryAxis("x", Chart.xAxis);
-		 	// x.addOrderRule("year");
-		  	myChart.addMeasureAxis("y", Chart.yAxis);
-		  	var s = myChart.addSeries(null, Chart.chartType);
-		  	myChart.addLegend(60, 10, 500, 20, "right");
-		  	myChart.draw();
-		});
-	}
-	else if (Chart.dataUrl.search('csv')){
-		d3.csv(data, function (data) {
-		// d3.csv("http://ichart.finance.yahoo.com/table.csv", function (data){  
+	//check the chart type
+	if (Chart.chartType.type == "dimple.plot.bar"){
+		Chart.xAxis = $('#x_axis').val();
+		Chart.yAxis = $('#y_axis').val();
+		Chart.orderRule = $('#order_rule').val();
+		Chart.series = $('#series').val() || null;
+		Chart.chartTypeId = $('.chart_type.selected').attr('id');
+		Chart.chartType.type = dimple.plot.bar
+		
+		//check if tsv
+		if (Chart.dataUrl.search('tsv') > 0) {
+			console.log('tsv');
+			//check if vertical
+			if (Chart.chartTypeId == "bar_vertical"){
+				d3.tsv(Chart.dataUrl, function (data) {
+				// d3.tsv(Chart.dataUrl, function (data) {
+					var myChart = new dimple.chart(svg, data);
+				 	myChart.setBounds(60, 30, Chart.chartWidth-85, Chart.chartHeight-95 );
+				 	var x = myChart.addCategoryAxis("x", Chart.xAxis);
+				 	x.addOrderRule(Chart.orderRule);
+				  	myChart.addMeasureAxis("y", Chart.yAxis);
+				  	var s = myChart.addSeries(null, Chart.chartType.type);
+				  	myChart.addLegend(60, 10, 500, 20, "right");
+				  	myChart.draw();
+				});
+			} 
+			//check if horizontal
+			else if (Chart.chartTypeId == "bar_horizontal"){
+				d3.tsv(Chart.dataUrl, function (data) {
+				// d3.tsv(Chart.dataUrl, function (data) {
+					var myChart = new dimple.chart(svg, data);
+				 	myChart.setBounds(60, 30, Chart.chartWidth-85, Chart.chartHeight-95 );
+				 	myChart.addMeasureAxis("x", Chart.xAxis);
+				 	var y = myChart.addCategoryAxis("y", Chart.yAxis);
+      				y.addOrderRule(Chart.orderRule);
+				  	var s = myChart.addSeries(null, Chart.chartType.type);
+				  	myChart.addLegend(60, 10, 500, 20, "right");
+				  	myChart.draw();
+				});
+			}
+			//end check if horizontal or vertical
+		}
+		//end tsv check csv
+		else if (Chart.dataUrl.search('csv') > 0){
+			console.log('csv');
+			//check if vertical
+			if (Chart.chartTypeId == "bar_vertical"){
+				d3.csv(Chart.dataUrl, function (data) {
+				// d3.tsv(Chart.dataUrl, function (data) {
+					var myChart = new dimple.chart(svg, data);
+				 	myChart.setBounds(60, 30, Chart.chartWidth-85, Chart.chartHeight-95 );
+				 	var x = myChart.addCategoryAxis("x", Chart.xAxis);
+				 	x.addOrderRule(Chart.orderRule);
+				  	myChart.addMeasureAxis("y", Chart.yAxis);
+				  	var s = myChart.addSeries(null, Chart.chartType.type);
+				  	myChart.addLegend(60, 10, 500, 20, "right");
+				  	myChart.draw();
+				});
+			} 
+			//check if horizontal
+			else if (Chart.chartTypeId == "bar_horizontal"){
+				d3.csv(Chart.dataUrl, function (data) {
+				// d3.tsv(Chart.dataUrl, function (data) {
+					var myChart = new dimple.chart(svg, data);
+				 	myChart.setBounds(60, 30, Chart.chartWidth-85, Chart.chartHeight-95 );
+				 	myChart.addMeasureAxis("x", Chart.xAxis);
+				 	var y = myChart.addCategoryAxis("y", Chart.yAxis);
+      				y.addOrderRule(Chart.orderRule);
+				  	var s = myChart.addSeries(null, Chart.chartType.type);
+				  	myChart.addLegend(60, 10, 500, 20, "right");
+				  	myChart.draw();
+				});
+			}
+			//end check if horizontal or vertical
+		}
+		//end csv check json
+		else if(Chart.dataUrl.search('json') > 0){
+			d3.json(data, function (data) {
+				var myChart = new dimple.chart(svg, data);
+			 	myChart.setBounds(60, 30, chartWidth-85, chartHeight-95 );
+			 	var x = myChart.addCategoryAxis("x", xAxis);
+			 	x.addOrderRule("year");
+			  	myChart.addMeasureAxis("y", yAxis);
+			  	var s = myChart.addSeries(null, chartType);
+			  	myChart.addLegend(60, 10, 500, 20, "right");
+			  	myChart.draw();
+			});
+		}
+		//end json
+	}//end chart type bar
+	else if (Chart.chartType.type == "dimple.plot.pie"){
+		Chart.measureAxis = $('#measure_axis').val();
+		Chart.orderRule = $('#order_rule').val();
+		Chart.series = $('#series').val();
+		Chart.chartTypeId = $('.chart_type.selected').attr('id');
+		
+		//check if tsv
+		if (Chart.dataUrl.search('tsv') > 0) {
+			console.log('tsv');
+			console.log(Chart.dataUrl);
+			console.log(Chart.chartWidth);
+			console.log(Chart.chartHeight);
+			console.log(Chart.measureAxis);
+			console.log(Chart.series);
+			d3.tsv(Chart.dataUrl, function (data) {
+			// d3.tsv(Chart.dataUrl, function (data) {
+				var myChart = new dimple.chart(svg, data);
+			 	myChart.setBounds(60, 30, Chart.chartWidth-85, Chart.chartHeight-95 );
+			 	myChart.addMeasureAxis("p", "Unit Sales");
+			  	myChart.addSeries('Owner', dimple.plot.pie);
+			  	myChart.addLegend(60, 10, 500, 20, "right");
+			  	myChart.draw();
+			});
+		}
+		//end tsv check csv
+		else if (Chart.dataUrl.search('csv') > 0){
+			console.log('csv');
+			d3.tsv(Chart.dataUrl, function (data) {
+			// d3.tsv(Chart.dataUrl, function (data) {
+				var myChart = new dimple.chart(svg, data);
+			 	myChart.setBounds(60, 30, Chart.chartWidth-85, Chart.chartHeight-95 );
+			 	myChart.addMeasureAxis("p", Chart.measureAxis);
+			  	myChart.addSeries(Chart.series, dimple.plot.pie);
+			  	myChart.addLegend(60, 10, 500, 20, "right");
+			  	myChart.draw();
+			});
+		}
+		//end csv check json
+		else if(Chart.dataUrl.search('json') > 0){
+			d3.json(data, function (data) {
+				var myChart = new dimple.chart(svg, data);
+			 	myChart.setBounds(60, 30, chartWidth-85, chartHeight-95 );
+			 	var x = myChart.addCategoryAxis("x", xAxis);
+			 	x.addOrderRule("year");
+			  	myChart.addMeasureAxis("y", yAxis);
+			  	var s = myChart.addSeries(null, chartType);
+			  	myChart.addLegend(60, 10, 500, 20, "right");
+			  	myChart.draw();
+			});
+		}
+		//end json
+	}//end chart type pie
+	else if (Chart.chartType.type == "dimmple.plot.area"){
 
-		  // data = dimple.filterData(data, "Owner", ["Aperture", "Black Mesa"])
-		  var myChart = new dimple.chart(svg, data);
-		  myChart.setBounds(60, 30, chartWidth-85, chartHeight-95 );
-		  // myChart.setBounds(60, 30, 505, 305);
-
-		  var x = myChart.addCategoryAxis("x", xAxis);
-		  //x.addOrderRule(['Jan', 'Feb', 'Mar', 'Apr']);
-		  x.addOrderRule("year");
-		  myChart.addMeasureAxis("y", yAxis);
-		  var s = myChart.addSeries(null, Chart.chartType);
-		  myChart.addLegend(60, 10, 500, 20, "right");
-
-		  // var x = myChart.addCategoryAxis("x", "Month");
-		  // x.addOrderRule("Date");
-		  // myChart.addMeasureAxis("y", "Unit Sales");
-		  // var s = myChart.addSeries("Channel", dimple.plot.area);
-		  // myChart.addLegend(60, 10, 500, 20, "right");
-		  myChart.draw();
-		});
-	}
-	else if(Chart.dataUrl.search('json')){
-		d3.json(data, function (data) {
-			var myChart = new dimple.chart(svg, data);
-		 	myChart.setBounds(60, 30, chartWidth-85, chartHeight-95 );
-		 	var x = myChart.addCategoryAxis("x", xAxis);
-		 	x.addOrderRule("year");
-		  	myChart.addMeasureAxis("y", yAxis);
-		  	var s = myChart.addSeries(null, chartType);
-		  	myChart.addLegend(60, 10, 500, 20, "right");
-		  	myChart.draw();
-		});
-	}
+	}//end chart type area
 	Items.initialization();
 }
 
