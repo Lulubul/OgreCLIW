@@ -6,6 +6,9 @@ var hover = $('<div class="hover-content"> <div class="info">  <p> Selectați </
 
 $( document ).ready(function() {
 
+    $('#cpButton').colorpicker({showOn:'button'});
+    $('a[href="#"]').attr('href', 'javascript:void(0)');
+
     $( "#up" ).click(function() {
         MiniMenu.MoveUp();
     });
@@ -30,6 +33,10 @@ $( document ).ready(function() {
         MiniMenu.Settings();
     });
 
+    $("#change").click(function() {
+        MiniMenu.Change();
+    });
+
     var selectBlock = function(event) {
         Items.reset();
         $("#miniMenu").css("display", "inline-block");
@@ -38,9 +45,10 @@ $( document ).ready(function() {
         selectedBlock.addClass('active');
         selectedBlock.prepend($("#miniMenu"));
         selectedBlock.children(".block").children(".hover-content").addClass("selected");
+        selectedBlock.prepend($("#itemMenu"));
+        var offset = selectedBlock.find('.block').offset();
 
-        var offset = selectedBlock.offset();
-        $("#itemMenu").css("top", offset.top - 237);
+        $("#miniMenu").css("left", offset.left - 310);
     };
 
     $(document).delegate('.block', 'click', function (event) {
@@ -99,8 +107,15 @@ MiniMenu = {
         var toggleWidth = $("#settingsContainer").height() == 100 ? "0px" : "100px";
         $('#settingsContainer').animate({ height: toggleWidth });
 
-        $('#widthBlock').val(selectedBlock.find('.block').width() + "px." );
-        $('#heightBlock').val(selectedBlock.find('.block').height() + "px." );
+        $('#widthBlock').val(selectedBlock.find('.block').width());
+        $('#heightBlock').val(selectedBlock.find('.block').height() );
+    },
+    Change: function() {
+        selectedBlock.find('.block').height($('#heightBlock').val());
+        $('.block').width($('#widthBlock').val());
+
+        var offset = selectedBlock.find('.block').offset();
+        $("#miniMenu").css("left", offset.left - 310);
     }
 }
 

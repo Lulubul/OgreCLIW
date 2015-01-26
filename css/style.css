@@ -51,24 +51,31 @@ header {
 	display: inline-block; 
 }
 
-			#title {
-				color: #FFF;
-				font-weight: 100;
-				font-size: 4.5em;
-				text-transform: uppercase;
-				text-shadow: 5px 0px 0px #8FD4DC, -5px 0px 0px #AD4158;
-				margin: 10px;
-			}
+.textItem 
+{
+	cursor: pointer;
+}
 
-			#subtitle {
-				color: #18E698;
-				font-weight: 300;
-				font-size: 1.5em;
-				padding: 0;
-				margin: 0 0 100px 0;
-			}
+#mini .sideMenu{
+	display: none;
+}
 
+#title {
+	color: #FFF;
+	font-weight: 100;
+	font-size: 4.5em;
+	text-transform: uppercase;
+	text-shadow: 5px 0px 0px #8FD4DC, -5px 0px 0px #AD4158;
+	margin: 10px;
+}
 
+#subtitle {
+	color: #18E698;
+	font-weight: 300;
+	font-size: 1.5em;
+	padding: 0;
+	margin: 0 0 100px 0;
+}
 
 #container {
 	display: block;
@@ -82,49 +89,64 @@ header {
 }
 
 #infographic {
-	display: inline-block;
-	margin-left: 150px;
-	width: 800px;
-	float: left;
 }
 
 
+#itemMenu {
+	background: white;
+	background-color: #E6E6E6;
+	padding: 15px 20px 15px 15px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
 
+#slider-1
+{
+	width: 100px;
+}
 
 .part {
-	width: 800px;
-	height: 300px;
-	margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-}
-
-.hover-content {
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0; 
-	position: absolute;
-	background: black;
-	opacity: 0.6;
-    filter: alpha(opacity=60); /* For IE8 and earlier */
-	display: none;
-	overflow: hidden;
+	width: 1200px;
+	margin: auto;
+	margin-bottom: 20px;
+	display: block;
+	position: relative;
 }
 
 .block {
     background: white;
+    position: relative;
+    display: block;
+    margin: auto;
 	width: 650px;
 	height: 300px;
-	margin: 2px 0 5px;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
     overflow: hidden;
     -webkit-box-shadow: 10px 10px 2px 0px rgba(15, 163, 163, 0.3);
     -moz-box-shadow: 10px 10px 2px 0px rgba(15, 163, 163, 0.3);
     box-shadow: 10px 10px 2px 0px rgba(15, 163, 163, 0.3);
 }
+
+.items {
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+.hover-content {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	position: absolute;
+	background: black;
+	opacity: 0.7;
+    filter: alpha(opacity=70); /* For IE8 and earlier */
+	display: none;
+	overflow: hidden;
+}
+
+
 
 .block:hover .hover-content {
     display:block;
@@ -159,10 +181,8 @@ header {
 }
 
 #miniMenu {
-	width: 15px;
 	height: 300px;
-	float: left;
-	display: inline-block;
+	position: absolute;
 }
 
 
@@ -171,7 +191,7 @@ header {
 	height: 40px;
 	display: block;
 	margin: 0;
-	margin-left: 0px;
+	margin-left: 100px;
 	background: #18E698;
 	-webkit-box-shadow: 5px 5px 5px 0px rgba(15, 163, 163, 0.3);
     -moz-box-shadow: 5px 5px 5px 0px rgba(15, 163, 163, 0.3);
@@ -292,28 +312,6 @@ header {
 
 .locked {
 
-}
-
-
-.items {
-	top: 0;
-	left: 0; 
-	width: 100%;
-	height: 100%;
-	position: absolute;
-}
-
-#itemMenu {
-	width: auto;
-	height: auto;
-	background: white;
-	position: relative;
-	background-color: #E6E6E6;
-	display: inline-block;
-	padding: 15px 20px 15px 15px;
-	border: 3px solid #E6E6E6;
-	border-radius: 8px;
-	box-shadow: 1px 1px 10px inset;
 }
 
 
@@ -511,3 +509,33 @@ ul
 }
 
 #chart_sets .bar_charts, #chart_sets .pie_charts {display:none;} 
+
+/* Color picker */
+a {
+  color: #39C;
+  font-weight: 400;
+}
+a:hover {
+  color: #FF9900;
+}
+a.sel {
+  color: #000;
+  text-decoration: none;
+}
+
+.demoPanel {
+  float: left;
+  margin: 0px;
+  padding: 0px;
+  width: 100px;
+}
+
+#textEditor p {
+  padding: 0px;
+  margin: 0px;
+  font-family: "Verdana";
+}
+
+.demoPanel input {
+  width: 100px;
+}

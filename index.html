@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/jquery.scrollbar.css" type="text/css" media="screen"/>
     <link rel="stylesheet" href="css/jquery-ui.css" type="text/css" media="screen"/>
     <link href='http://fonts.googleapis.com/css?family=Lato:400,100,300,400italic,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href="css/evol.colorpicker.min.css" rel="stylesheet" /> 
     <script type="text/javascript" src="js/jquery-1.11.2.min.js" ></script>
     <script type="text/javascript" src="js/jquery-ui.js" ></script>
     <script type="text/javascript" src="js/items.js" ></script>
@@ -22,6 +23,8 @@
     <script type="text/javascript" src="js/tsvParser/jquery.tsv-0.96.min.js"></script>
     <script type="text/javascript" src="js/functions.js"></script>
     <script type="text/javascript" src="js/jquery.scrollbar.min.js"></script>
+    <script type="text/javascript" src="js/evol.colorpicker.min.js" ></script>
+    <script type="text/javascript" src="js/colorpicker.js"></script>
 </script>
 
 </head>
@@ -54,6 +57,9 @@
                             </li>
                             <li>
                                 <button id="salveaza">Salveaza</button>
+                            </li>
+                            <li>
+                                <button id="visualizeaza">Vizualizeaza</button>
                             </li>
                         </ul>
                     </section>
@@ -204,16 +210,24 @@
                         <div id="settings">
                             <img src="images/settings.png" alt="settings" />
                         </div>
-                        <span id="settingsContainer">
-                            <span> 
-                                <label for="widthBlock">Width: </label>
-                                <input type="text" id="widthBlock" readonly style="border:0; color:#f6931f; font-weight:bold;"> 
-                            </span>
+                        <span id="settingsContainer" di>
+                             <ul>
+                                <li class="label"> 
+                                    <label for="widthBlock">Width: </label>
+                                    <input type="text" id="widthBlock" style=" width: 50px; border:0; color:#f6931f; font-weight:bold;"> 
+                                </li>
 
-                            <span> 
-                                <label for="heightBlock">Height: </label>
-                                <input type="text" id="heightBlock" readonly style="border:0; color:#f6931f; font-weight:bold;">
-                            </span>
+                                <li class="label" > 
+                                    <label for="heightBlock">Height: </label>
+                                    <input type="text" id="heightBlock" style=" width: 50px; border:0; color:#f6931f; font-weight:bold;">
+                                </li>
+
+                                <li class="label"> 
+                                    <button id="change">
+                                     Change
+                                    </button>
+                                </li>
+                            </ul>
                         </span>
                     </div>
 
@@ -271,7 +285,56 @@
                             </div>
 
                         </div>
+
+                        <section id="itemMenu">
+                                <div id="imageEditor">
+                                    <label for="amount">Alpha:</label>
+                                    <input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;">
+                                    <div id="slider-1"></div>
+
+                                    <div id="flipH"> 
+                                        <img src="images/flipH.png" alt="flipHorizontal" />
+                                    </div>
+
+                                    <div id="flipV"> 
+                                        <img src="images/flipV.png" alt="flipVertical" />
+                                    </div>
+
+                                    <div id="widthItem"> 
+                                        <label for="width">Width: </label>
+                                        <input type="text" id="width" style="border:0; color:#f6931f; font-weight:bold;"> 
+                                    </div>
+
+                                    <div id="heightItem"> 
+                                        <label for="height">Height: </label>
+                                        <input type="text" id="height" style="border:0; color:#f6931f; font-weight:bold;">
+                                    </div>
+                                </div>
+
+                                <div id="textEditor" style="visibility: hidden">
+                                     <select>
+                                        <option style="font-family: 'Comic Sans MS'"> Comic Sans MS </option>
+                                        <option style="font-family: 'Arial'"> Arial </option>
+                                        <option style="font-family: 'Times New Roman'"> Times New Roman </option>
+                                        <option style="font-family: 'Verdana'"> Verdana </option>
+                                        <option style="font-family: 'Impact'"> Impact </option>
+                                        <option style="font-family: 'Courier'"> Courier </option>
+                                    </select>
+
+                                    <p> Italic </p>
+                                    <p> Font size: </p> 
+                                    <select id="fontSize"> </select>
+                                    <div class="demoPanel">
+                                        <p> Color picker </p>
+                                        <input id="cpButton" value="#92cddc" />
+                                    </div>
+                                </div>
+                        </section>
+
                     </div>
+
+        
+
                     <div class="part">
                         <div class="block">
                             <div class="items">
@@ -289,7 +352,6 @@
                     </div>
                     <div class="part">
                         <div class="block">
-
                             <div class="items">
                                 <div class="ui-widget draggble">
                                     <img src="images/icons/3.png" />
@@ -305,47 +367,7 @@
                     </div>
             </section>
 
-            <section id="itemMenu">
 
-                    <div id="imageEditor">
-                        <label for="amount">Alpha:</label>
-                        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-                        <div id="slider-1"></div>
-
-                        <div id="flipH"> 
-                            <img src="images/flipH.png" alt="flipHorizontal" />
-                        </div>
-
-                        <div id="flipV"> 
-                            <img src="images/flipV.png" alt="flipVertical" />
-                        </div>
-
-                        <div id="widthItem"> 
-                            <label for="width">Width: </label>
-                            <input type="text" id="width" readonly style="border:0; color:#f6931f; font-weight:bold;"> 
-                        </div>
-
-                        <div id="heightItem"> 
-                            <label for="height">Height: </label>
-                            <input type="text" id="height" readonly style="border:0; color:#f6931f; font-weight:bold;">
-                        </div>
-                    </div>
-
-                    <div id="textEditor" style="visibility: hidden">
-                        <select>
-                            <option style="font-family: 'Comic Sans MS'">Comic Sans MS</option>
-                            <option style="font-family: Arial">Arial</option>
-                            <option style="font-family: 'Times New Roman'">Times New Roman</option>
-                            <option style="font-family: 'Verdana'">Verdana</option>
-                            <option style="font-family: 'Impact'">Impact</option>
-                            <option style="font-family: 'Courier'">Courier</option>
-                        </select>
-
-                        <p> Italic </p>
-                        <p> Font size </p>
-
-                    </div>
-            </section>
 
         </article>
 
