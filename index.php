@@ -30,6 +30,13 @@
 </head>
 
 <body>
+    <div class="save_progress">
+        <div class="save_progress_inner">
+            <p>Save your progress</p>
+            <div class="hide"><img src="images/arrowU.png"></div>
+            <div class="show"><img src="images/arrowD.png"></div>
+        </div>
+    </div>
     <header id="container">
         <div id="container-body" class="clearfix">
             <div id="logo">
@@ -41,19 +48,16 @@
         <div class="inner-block">
             <div id="block-left">
                 <div id="left-menu">
-                    <span>
-                    </span>
-                    <span>
-                    </span>
-                    <span>
-                    </span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
                 <article id="menu">
                     <h3>Infographic menu</h3>
                     <section id="infoMenu"> 
                         <ul>
                             <li>
-                                <button id="incarca">Încarcă</button>
+                                <input id="incarca">Încarcă</button>
                             </li>
                             <li>
                                 <button id="salveaza">Salveaza</button>
