@@ -63,7 +63,7 @@
                             </li>
                         </ul>
                     </section>
-                     <h3>Add Chart</h3>
+                    <h3>Add Chart</h3>
                     <section>
                         <div class="chart_editor_block" id="chart_data">
                             <div class="upload_data">
@@ -181,6 +181,11 @@
                         <div id="loaded_images" class="">
                         </div>
                     </section>
+                    <h3>Add Text</h3>
+                    <section>
+                        <input type="text" id="textInput" name="chartWidth" placeholder="Text"/> 
+                        <button id="addText"> Add Text </button>
+                    </section>
                 </article>
             </div></div>
     </header>
@@ -190,7 +195,76 @@
         <article id="container-body">
 
             <section id="mini">
-                
+
+                    <section id="itemMenu">
+                            <div id="imageEditor">
+                                <label for="amount">Alpha:</label>
+                                <input type="text" id="amount">
+                                <div id="slider-1"></div>
+
+                                <div class="panel">
+                                    <p> Flip Image </p>
+                                    <div id="flipH"> 
+                                        <img src="images/flipH.png" alt="flipHorizontal" />
+                                    </div>
+
+                                    <div id="flipV"> 
+                                        <img src="images/flipV.png" alt="flipVertical" />
+                                    </div>
+                                </div>
+
+                                <div id="widthItem"> 
+                                    <label for="width">Width: </label>
+                                    <input type="text" id="width"> 
+                                </div>
+
+                                <div id="heightItem"> 
+                                    <label for="height">Height: </label>
+                                    <input type="text" id="height">
+                                </div>
+                            </div>
+
+                            <div id="textEditor">
+                                <label for="widthText">Width: </label>
+                                <input type="text" id="widthText"> 
+
+                                <div class="fontPanel">
+                                    <p> Font family: </p>
+                                    <select id="fontFamily">
+                                        <option style="font-family: 'Times New Roman'"> Times New Roman </option>
+                                        <option style="font-family: 'Comic Sans MS'"> Comic Sans MS </option>
+                                        <option style="font-family: 'Arial'"> Arial </option>
+                                        <option style="font-family: 'Verdana'"> Verdana </option>
+                                        <option style="font-family: 'Impact'"> Impact </option>
+                                        <option style="font-family: 'Courier'"> Courier </option>
+                                    </select>
+                                     <p> Font size:  </p> 
+                                     <select id="fontSize"> </select>
+                                </div>
+
+                                <div class="demoPanel">
+                                    <p> Color picker <input id="cpButton" value="#92cddc" /> </p>
+                                </div>
+
+                                <div class="alignPanel">
+                                    <p> Text Align </p>
+
+                                    <div id="alignRight"> 
+                                        <img src="images/align_right.png" alt="alignRight"/> 
+                                    </div>
+                                    
+                                    <div id="alignJustify"> 
+                                        <img src="images/align_justify.png" alt="alignCenter"/> 
+                                    </div>
+
+                                    <div id="alignLeft">
+                                        <img src="images/align_left.png" alt="alignLeft"/>
+                                    </div>
+
+                                <div>
+                            </div>
+                    </section>
+
                     <div id="miniMenu"> 
                         <div id="up" > 
                             <img src="images/arrowU.png" alt="up" />
@@ -223,9 +297,7 @@
                                 </li>
 
                                 <li class="label"> 
-                                    <button id="change">
-                                     Change
-                                    </button>
+                                    <button id="change"> Change </button>
                                 </li>
                             </ul>
                         </span>
@@ -268,10 +340,10 @@
                         <div class="block">
                             <div class="items">
                                 <div class="ui-widget draggble">
-                                    <img src="images/icons/1.png" />
+                                    <img src="images/vectors/globe.png" />
                                 </div>
                                 <div class="ui-widget draggble">
-                                    <img src="images/icons/3.png" />
+                                    <img src="images/vectors/cursor.png" />
                                 </div>
                                 <div class="ui-widget draggble textItem">
                                     <p> Hello </p>
@@ -285,61 +357,13 @@
                             </div>
 
                         </div>
-
-                        <section id="itemMenu">
-                                <div id="imageEditor">
-                                    <label for="amount">Alpha:</label>
-                                    <input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;">
-                                    <div id="slider-1"></div>
-
-                                    <div id="flipH"> 
-                                        <img src="images/flipH.png" alt="flipHorizontal" />
-                                    </div>
-
-                                    <div id="flipV"> 
-                                        <img src="images/flipV.png" alt="flipVertical" />
-                                    </div>
-
-                                    <div id="widthItem"> 
-                                        <label for="width">Width: </label>
-                                        <input type="text" id="width" style="border:0; color:#f6931f; font-weight:bold;"> 
-                                    </div>
-
-                                    <div id="heightItem"> 
-                                        <label for="height">Height: </label>
-                                        <input type="text" id="height" style="border:0; color:#f6931f; font-weight:bold;">
-                                    </div>
-                                </div>
-
-                                <div id="textEditor" style="visibility: hidden">
-                                     <select>
-                                        <option style="font-family: 'Comic Sans MS'"> Comic Sans MS </option>
-                                        <option style="font-family: 'Arial'"> Arial </option>
-                                        <option style="font-family: 'Times New Roman'"> Times New Roman </option>
-                                        <option style="font-family: 'Verdana'"> Verdana </option>
-                                        <option style="font-family: 'Impact'"> Impact </option>
-                                        <option style="font-family: 'Courier'"> Courier </option>
-                                    </select>
-
-                                    <p> Italic </p>
-                                    <p> Font size: </p> 
-                                    <select id="fontSize"> </select>
-                                    <div class="demoPanel">
-                                        <p> Color picker </p>
-                                        <input id="cpButton" value="#92cddc" />
-                                    </div>
-                                </div>
-                        </section>
-
                     </div>
-
-        
 
                     <div class="part">
                         <div class="block">
                             <div class="items">
                                 <div class="ui-widget draggble">
-                                    <img src="images/icons/2.png" />
+                                    <img src="images/vectors/2.png" />
                                 </div>
                             </div>
 
@@ -354,7 +378,7 @@
                         <div class="block">
                             <div class="items">
                                 <div class="ui-widget draggble">
-                                    <img src="images/icons/3.png" />
+                                    <img src="images/vectors/3.png" />
                                 </div>
                             </div>
 
@@ -366,15 +390,11 @@
                         </div>
                     </div>
             </section>
-
-
-
         </article>
 
     </div>
 
     <footer>
-
     </footer>
 </body>
 </html>

@@ -66,22 +66,38 @@ Items = {
           $('#textEditor').css('visibility','hidden');
           $('#textEditor').css('height','0px');
           $('#imageEditor').css('visibility','visible');
-          $('#imageEditor').css('height','150px');
-          $('#width').val(newItem.children('img').width() + "px." );
-          $('#height').val(newItem.children('img').height() + "px.");
+          $('#imageEditor').css('height','auto');
+          $('#width').val(newItem.children('img').width());
+          $('#height').val(newItem.children('img').height());
         }
         else 
         {
           $('#imageEditor').css('visibility','hidden');
           $('#imageEditor').css('height','0px');
           $('#textEditor').css('visibility','visible');
-          $('#textEditor').css('height','150px');
+          $('#textEditor').css('height','auto');
+
+          $('#fontFamily').val(selectedItem.find('p').css('font-family'));
+          $('#fontSize').val(selectedItem.find('p').css('font-size').replace(/[^0-9]/g, ''));
+
+          var colorRGB = rgb2hex(selectedItem.find('p').css('color'));
+          $('#cpButton').val(colorRGB);
+          $('#cpButton').colorpicker("val", colorRGB);
+          $('#widthText').val(selectedItem.find('p').css('width').replace(/[^0-9]/g, '')); 
         }
 
         $( "#amount" ).val( newItem.children('img').css('opacity') );
         $('#slider-1').slider("value", newItem.children('img').css('opacity') * 100);
     }
 };
+
+function rgb2hex(rgb){
+ rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+ return "#" +
+  ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+  ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+  ("0" + parseInt(rgb[3],10).toString(16)).slice(-2);
+}
 
 $( document ).ready(function() {
     /* Slider */
@@ -95,10 +111,11 @@ $( document ).ready(function() {
         }
     });
 
-    Items.initialization();
+    /* Color Picker */
+    $('#cpButton').colorpicker( {showOn:'button'}) ;
+    $('a[href="#"]').attr('href', 'javascript:void(0)');
 
-    for (var i= 12; i < 30; i++)
-        $('#fontSize').append($('<option>', {value:i, text:i}));
+    Items.initialization();
 
     $(document).on("mousedown", ".draggble" , function() {
       Items.select($(this));
@@ -165,6 +182,55 @@ $( document ).ready(function() {
     $( "#mUnlock" ).click(function() {
         ContextMenu.Unlock();
     });
+
+
+    /* Text Menu */
+    for (var i = 15; i <= 50; i++)
+        $('#fontSize').append($('<option>', {value:i, text:i}));
+
+    $( "#fontFamily" ).change(function () {
+        $( "#fontFamily option:selected" ).each(function() {
+          selectedItem.find('p').css("font-family", $( this ).text());
+        });
+    });
+
+    $( "#fontSize" ).change(function () {
+        $( "#fontSize option:selected" ).each(function() {
+            selectedItem.find('p').css("font-size", $( this ).text() + "px");
+        });
+    });
+
+    $('#cpButton').colorpicker()
+      .on('change.color', function(evt, color){
+        selectedItem.find('p').css("color", color);
+    });
+
+    $( "#widthText" ).change(function() {
+       selectedItem.find('p').css('width',  $( this ).val() + "px");
+    });
+
+    $( "#width" ).change(function() {
+       selectedItem.find('img').css('width',  $( this ).val() + "px");
+    });
+
+    $( "#height" ).change(function() {
+       selectedItem.find('img').css('height',  $( this ).val() + "px");
+    });
+
+    $( "#alignRight" ).click(function() {
+       selectedItem.find('p').css("text-align", "right");
+    });
+
+    $( "#alignJustify" ).click(function() {
+        selectedItem.find('p').css("text-align", "center");
+    });
+
+    $( "#alignLeft" ).click(function() {
+        selectedItem.find('p').css("text-align", "left");
+    });
+
+        
+
 });
 
 ContextMenu = {
@@ -180,6 +246,8 @@ ContextMenu = {
       $( "#contextmenu" ).appendTo($("#mini"));
       selectedItem.remove();
       selectedItem = -1;
+      $('#imageEditor').css('visibility', 'hidden');
+      $('#textEditor').css('visibility', 'hidden');
     },
     Paste: function() {
         copyElement.appendTo( selectedBlock.find( ".items" ) );

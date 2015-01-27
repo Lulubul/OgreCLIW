@@ -56,6 +56,14 @@ header {
 	cursor: pointer;
 }
 
+.textItem p {
+	font-family: Arial;
+	font-size: 17px;
+	width: 100px;
+}
+
+
+
 #mini .sideMenu{
 	display: none;
 }
@@ -99,6 +107,8 @@ header {
 	position: absolute;
 	top: 0;
 	right: 0;
+	width: 150px;
+	height: 230px;
 }
 
 #slider-1
@@ -112,6 +122,17 @@ header {
 	margin-bottom: 20px;
 	display: block;
 	position: relative;
+}
+
+.alignPanel {
+	display: block;
+	width: 100%;
+}
+
+.alignPanel div {
+	display: inline-block;
+	cursor: pointer;
+	width: 20px;
 }
 
 .block {
@@ -145,8 +166,6 @@ header {
 	display: none;
 	overflow: hidden;
 }
-
-
 
 .block:hover .hover-content {
     display:block;
@@ -235,6 +254,14 @@ header {
 	display: block;
 }
 
+#settingsContainer ul{
+	margin: 5px;
+}
+
+#settingsContainer ul li{
+	margin-top: 5px;
+}
+
 #up:hover:after {
 	content: 'Move up';
 }
@@ -265,7 +292,11 @@ header {
 }
 
 #drag > img {
-	border:1px solid #000000;
+	border: 1px solid #000000;
+}
+
+#drag p{
+	border: 1px solid #000000;
 }
 
 #mini .jqcontextmenu {
@@ -314,7 +345,6 @@ header {
 
 }
 
-
 .flip-horizontal {
     -moz-transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
@@ -334,7 +364,7 @@ header {
 }
 
 #block-left {
-	width:300px;
+	width: 330px;
 	top: -100px;
 	left: -340px;
 	float:left;
@@ -348,7 +378,7 @@ header {
 #block-left #left-menu {
 	display: block;
 	position: absolute;
-	left: 340px;
+	left: 330px;
 	top: 60px;
 	background-color: #dfdfdf;
 	border-top-right-radius: 4px;
@@ -365,7 +395,7 @@ header {
 }
 
 #block-left {
-	width:300px;
+	width: 330px;
 	top: -150px;
 	left: -330px;
 	float:left;
@@ -394,19 +424,22 @@ header {
 	display: block;
 }
 
-#block-left.open {left:0;}
-.inner-block {position:relative;}
-
-
-#block-left #types_charts 
-{
-	height:245px;
+#block-left.open {
+	left: 0;
 }
+.inner-block {
+	position: relative;
+}
+
+#block-left #types_charts {
+	height: 245px;
+}
+
 #block-left #types_charts li img {
-	width:100px; 
-	height:auto; 
-	margin:4px;
-	border:1px solid transparent;
+	width: 100px; 
+	height: auto; 
+	margin: 4px;
+	border: 1px solid transparent;
 }
 
 #block-left #types_charts li img.selected {
@@ -524,16 +557,43 @@ a.sel {
 }
 
 .demoPanel {
-  float: left;
   margin: 0px;
-  padding: 0px;
-  width: 100px;
+  display: block;
+}
+
+.panel {
+	margin: 0px;
+}
+.panel div{
+	display: inline-block;
+}
+
+.fontPanel {
+  margin: 0px;
+}
+
+#itemMenu input {
+	border: 0px;
+	font-weight: bold;
+	width: 50px;
 }
 
 #textEditor p {
   padding: 0px;
   margin: 0px;
   font-family: "Verdana";
+}
+
+
+#imageEditor {
+	height: 0px;
+	visibility: hidden;
+}
+
+#textEditor {
+	height: 0px;
+	visibility: hidden;
+	width: 180px;
 }
 
 .demoPanel input {

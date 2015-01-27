@@ -6,8 +6,15 @@ var hover = $('<div class="hover-content"> <div class="info">  <p> Selectați </
 
 $( document ).ready(function() {
 
-    $('#cpButton').colorpicker({showOn:'button'});
-    $('a[href="#"]').attr('href', 'javascript:void(0)');
+
+    var $scrollingDiv = $("#block-left");
+ 
+    $(window).scroll(function(){            
+        $scrollingDiv
+            .stop()
+            .animate({"marginTop": ($(window).scrollTop() + 30) + "px"}, "slow" );          
+    });
+
 
     $( "#up" ).click(function() {
         MiniMenu.MoveUp();
@@ -37,6 +44,13 @@ $( document ).ready(function() {
         MiniMenu.Change();
     });
 
+
+    $( "#addText" ).click(function() {
+        selectedBlock.find('.items').append('<div class="ui-widget draggble textItem"> <p> ' + $( "#textInput" ).val() + '</p>');
+        $( "#textInput" ).val('');
+        Items.initialization();
+    }); 
+
     var selectBlock = function(event) {
         Items.reset();
         $("#miniMenu").css("display", "inline-block");
@@ -47,6 +61,9 @@ $( document ).ready(function() {
         selectedBlock.children(".block").children(".hover-content").addClass("selected");
         selectedBlock.prepend($("#itemMenu"));
         var offset = selectedBlock.find('.block').offset();
+
+        $('#imageEditor').css('visibility','hidden');
+        $('#textEditor').css('visibility','hidden');
 
         $("#miniMenu").css("left", offset.left - 310);
     };
@@ -87,7 +104,8 @@ MiniMenu = {
     },
     Clone: function() {
         var newBlock = selectedBlock.clone();
-        newBlock.find('div:first').remove();
+        newBlock.find('#miniMenu').remove();
+        newBlock.find('#itemMenu').remove();
         newBlock.children(".block").children(".hover-content").removeClass("selected");
         newBlock.appendTo( "#infographic" );
         newBlock.insertAfter( selectedBlock );
@@ -96,6 +114,7 @@ MiniMenu = {
     },
     Delete: function() {
         $("#mini").prepend($("#miniMenu"));
+        $("#mini").prepend($("#itemMenu"));
         $("#miniMenu").css("display", "inline-block");
         selectedBlock.remove();
         selectedBlock = -1;
