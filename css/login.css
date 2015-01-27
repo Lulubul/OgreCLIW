@@ -136,17 +136,11 @@ body {
   width: auto;
 }
 
-.register,
+
 .separator,
 .login {
   display: inline-block;
   vertical-align: top;
-}
-
-.register,
-.login {
-  width: 44.5%;
-  padding: 15px 0px 0px 0px;
 }
 
 .login {
@@ -198,7 +192,7 @@ body {
   background-color: #FFFFFF;
   border-radius: 3px;
   box-shadow: 0px 0px 25px #000000;
-  height: 500px;
+  height: 460px;
   overflow:hidden;
   border: 2px solid #000000;
 }
@@ -279,7 +273,9 @@ body {
               color: #000;
               text-align: center;
               text-shadow: 0 1px #2a85a1;
-
+              white-space: nowrap; 
+              overflow: hidden;
+              text-overflow: ellipsis; 
             }
             .login-help a 
             {
@@ -335,7 +331,7 @@ body {
             }
               input[type=submit] 
             {
-              
+
               line-height: 50px;
               padding: 0 0;
               width: 64%;
@@ -533,3 +529,24 @@ body {
                     .btn-twitter.large:before {
                         background-position: -36px -22px;
                     }
+
+
+
+
+@media all and (max-width: 1024px) and (min-width: 147px) {
+  .separator,
+  .login {
+    display: block;
+  }
+
+  .separator {
+  height: 1px;
+  margin: 0 0 0 0;
+  border: 1px inset #fff;
+
+}
+
+  .main-content {
+    height: 860px;
+  }
+}
