@@ -396,7 +396,7 @@ header {
 
 #block-left {
 	width: 330px;
-	top: -150px;
+	top: 0;
 	left: -330px;
 	float:left;
 	z-index:100;
@@ -427,9 +427,6 @@ header {
 #block-left.open {
 	left: 0;
 }
-.inner-block {
-	position: relative;
-}
 
 #block-left #types_charts {
 	height: 245px;
@@ -459,7 +456,7 @@ ul
 	list-style-type: none;
 }
 
-#infoMenu button 
+#infoMenu button, #infoMenu input 
 {
 	background: transparent;
 	border: 2px solid #1ECD97;
@@ -599,3 +596,20 @@ a.sel {
 .demoPanel input {
   width: 100px;
 }
+
+#loaded_images {
+	height:300px;
+}
+
+#loaded_images .loaded_images {
+	max-width: 75px;
+	max-height: 75px;
+	border:1 px solid transparent;
+	margin:2px;
+}
+
+#loaded_images .loaded_images.selected {
+	border:1px solid #333333;
+}
+
+button#add_image {display:none;}

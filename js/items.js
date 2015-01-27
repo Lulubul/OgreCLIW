@@ -33,7 +33,7 @@ var relativeY;
 
 Items = {
     initialization: function() {
-      Items.drag($(".ui-widget"));
+      Items.drag($("#infographic .ui-widget "));
     },
     reset: function() {
       $(".ui-widget").removeAttr( "id" );

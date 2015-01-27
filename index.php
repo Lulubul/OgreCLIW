@@ -170,6 +170,7 @@
                     </section>
                     <h3>Add photo</h3>
                     <section>
+
                         <div class="upload_image">
                             <input type="file" id="uploaded_image" name="image" />
                             <div class="upload_local_image">
@@ -179,7 +180,9 @@
                             </div>
                         </div>
                         <div id="loaded_images" class="">
+                            <?php include 'functions.php'; ?>
                         </div>
+                        <div class="add_button"><button id="add_image">Add Image</button></div>
                     </section>
                     <h3>Add Text</h3>
                     <section>

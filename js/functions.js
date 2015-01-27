@@ -12,7 +12,13 @@ Chart.Initial = function () {
       	active: false
     });
 
-    $('#block-left #types_charts').scrollbar();
+    $('#loaded_images .loaded_images').on('click', function(){
+		$('.loaded_images').removeClass('selected');
+		$(this).addClass('selected');
+		$('button#add_image').show();
+	});
+
+    $('#block-left #types_charts, #loaded_images').scrollbar();
 
     $('#block-left #left-menu').on('click', function(){
 		$('#block-left').toggleClass('open', 300);

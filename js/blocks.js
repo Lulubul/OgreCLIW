@@ -51,6 +51,12 @@ $( document ).ready(function() {
         Items.initialization();
     }); 
 
+    $( "#add_image" ).click(function() {
+        image_src = $('#loaded_images .loaded_images.selected').attr('src');
+        selectedBlock.find('.items').append('<div class="ui-widget draggble"> <img src="'+ image_src +'" >');
+        Items.initialization();
+    }); 
+
     var selectBlock = function(event) {
         Items.reset();
         $("#miniMenu").css("display", "inline-block");
