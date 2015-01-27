@@ -98,15 +98,17 @@ h1, h3, h4, h5, p {
 
 body {
     font-family: 'Lato', Arial, sans-serif;
-	background: url("../images/bg.jpg");
-	/* Internet Explorer 10 */
+	  background: url("../images/bg.jpg");
+    min-height: 800px;
+    /* Internet Explorer 10 */
     display:-ms-flexbox;
     -ms-flex-pack:center;
     -ms-flex-align:center;
     /* Firefox */
-    display:-moz-box;
-    -moz-box-pack:center;
-    -moz-box-align:center;
+    display: -moz-inline-box;
+    -moz-box-pack: center;
+    -moz-box-align: center;
+    width: 100%; /* Firefox needs this */
     /* Safari, Opera, and Chrome */
     display:-webkit-box;
     -webkit-box-pack:center;
@@ -114,13 +116,12 @@ body {
     /* W3C */
     display:box;
     box-pack:center;
-    box-align:center;
-    min-height: 800px;
+    box-align:center;   
 }
 
 .centerPseudo {
 	display:inline-block;
-    text-align:center;
+  text-align:center;
 }
 .centerPseudo::before {
     content:'';
