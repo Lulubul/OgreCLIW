@@ -3,6 +3,7 @@
   <head>
     <script src="js/login.js"></script>
   	<link rel="stylesheet" href="css/login.css">
+
   </head>
 
   <body>
@@ -11,13 +12,15 @@
       <!-- Main content -->
       <div class="main-content">
         <!-- Autentification -->
-        <section class="autentification container">
+        
           <div>
             <div class="login">
               <h1>Sign Up</h1>
 
               <!-- Facebook Login -->
-              
+
+
+
               <form method="post" action="index.html">
                 <p><input type="text" name="login" value="" placeholder="Username or Email"></p>
                 <p><input type="password" name="password" value="" placeholder="Password"></p>
@@ -47,6 +50,20 @@
 
               <!-- Facebook Login -->
 
+              <a class="btn-auth btn-facebook large" href="#">
+                  Sign in with <b>Facebook</b>
+              </a>
+
+              <span class="or">- or -</span>
+
+              <!-- Twitter Login -->
+              <a class="btn-auth btn-twitter large" href="#">
+                  Sign in with <b>Twitter</b>
+              </a>
+
+              <br><br>
+              <span class="or">- or -</span>
+              <br>
 
               <form method="post" action="index.html">
                 <p><input type="text" name="login" value="" placeholder="Username or Email"></p>
@@ -57,7 +74,7 @@
                     Remember me on this computer
                   </label>
                 </p>
-                <p class="submit"><input type="submit" name="commit" value="Login"></p>
+                <p class="submit clearfix"><input type="submit" name="commit" value="Login"></p>
               </form>
 
               <div class="login-help">
@@ -66,7 +83,7 @@
 
             </div>
           </div>
-        </section>
+        
       </div>
 
     </div>

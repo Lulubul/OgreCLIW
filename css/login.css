@@ -133,7 +133,7 @@ body {
 .main-content,
 .container {
   margin: 0 auto;
-  width: 900px;
+  width: auto;
 }
 
 .register,
@@ -145,18 +145,18 @@ body {
 
 .register,
 .login {
-  width: 46%;
+  width: 44.5%;
   padding: 15px 0px 0px 0px;
 }
 
 .login {
   position: relative;
   margin: 0 auto;
-  padding: 20px 20px 20px;
+  padding: 20px 0px 20px 0px;
   background: white;
   border-radius: 3px;
-  -webkit-box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+  width: 370px;
+  height: auto;
 }
 .login:before 
 {
@@ -174,9 +174,10 @@ body {
 
 .separator {
   width: 1px;
-  height: 420px;
-  margin: 37px 12px 30px 18px;
+  height: 480px;
+  margin: 0 0 0 0;
   border: 1px inset #fff;
+
 }
 
 
@@ -191,17 +192,15 @@ body {
 .main-content {
   background-color: #F2F2F2;
   position: relative;
-  border: 1px solid #e2e1e1;
   border-radius: 3px;
-  box-shadow: 2px 1px 25px #888888;
+  display: inline-block;
+  padding: 0px;
+  background-color: #FFFFFF;
+  border-radius: 3px;
+  box-shadow: 0px 0px 25px #000000;
+  height: 500px;
+  overflow:hidden;
 }
-          
-          .autentification {
-            display: inline-block;
-            padding: 0px;
-            background-color: #F2F2F2;
-
-          }
           
             /*
       			  ========================================
@@ -209,9 +208,12 @@ body {
       			  ========================================
       			*/
 
+           
+
 			      .login h1 
             {
-              margin: -20px -20px 21px;
+
+              margin: -20px 0px 21px 0px;
               line-height: 40px;
               font-size: 15px;
               font-weight: bold;
@@ -225,8 +227,6 @@ body {
               background-image: -moz-linear-gradient(top, whiteffd, #eef2f5);
               background-image: -o-linear-gradient(top, whiteffd, #eef2f5);
               background-image: linear-gradient(to bottom, whiteffd, #eef2f5);
-              -webkit-box-shadow: 0 1px whitesmoke;
-              box-shadow: 0 1px whitesmoke;
 
             }
             .login p 
@@ -241,23 +241,22 @@ body {
             }
             .login input[type=text], .login input[type=password] 
             {
-              width: 278px;
+              width: 230px;
 
             }
-            .login p.remember_me 
+            .login p.remember_me
             {
+              display: block;
               float: left;
               line-height: 31px;
-
-            }
-            .login p.remember_me label 
+            } .or {float: center; line-height: 5px; margin: 15px 0 15px 0; display: block;}
+            .login p.remember_me label
             {
               font-size: 12px;
               color: #777;
               cursor: pointer;
-
-            }
-            .login p.remember_me input 
+            } .or {font-size: 12px; color: #777;}
+            .login p.remember_me input , .or
             {
               position: relative;
               bottom: 1px;
@@ -267,7 +266,8 @@ body {
             }
             .login p.submit 
             {
-              text-align: right;
+
+              text-align: center;
 
             }
             .login-help 
@@ -281,7 +281,7 @@ body {
             }
             .login-help a 
             {
-              color: #cce7fa;
+              color: #7A8B96;
               text-decoration: none;
 
             }
@@ -310,9 +310,8 @@ body {
             }
               input[type=text], input[type=password] 
             {
-              margin: 5px;
-              padding: 0 10px;
-              width: 200px;
+              margin: 0;
+              padding: 0 0;
               height: 34px;
               color: #404040;
               background: white;
@@ -334,9 +333,10 @@ body {
             }
               input[type=submit] 
             {
+              
               padding: 0 18px;
               height: 29px;
-              font-size: 12px;
+              font-size: 17px;
               font-weight: bold;
               color: #527881;
               text-shadow: 0 1px #e3f1f1;
@@ -366,3 +366,172 @@ body {
             }
 
 
+                    /*
+                      ========================================
+                      Login - facebook btn
+                      ========================================
+                    */
+                    .btn-auth,
+                    .btn-auth:visited {
+                        position: relative;
+                        display: inline-block;
+                        height: 22px;
+                        padding: 0 1em;
+                        border: 1px solid #999;
+                        border-radius: 2px;
+                        margin: 0;
+                        text-align: center;
+                        text-decoration: none;
+                        font-size: 14px;
+                        line-height: 22px;
+                        white-space: nowrap;
+                        cursor: pointer;
+                        color: #222;
+                        background: #fff;
+                        -webkit-box-sizing: content-box;
+                        -moz-box-sizing: content-box;
+                        box-sizing: content-box;
+                        -webkit-user-select: none;
+                        -moz-user-select: none;
+                        -ms-user-select: none;
+                        user-select: none;
+                        /* iOS */
+                        -webkit-appearance: none; /* 1 */
+                        /* IE6/7 hacks */
+                        *overflow: visible;  /* 2 */
+                        *display: inline; /* 3 */
+                        *zoom: 1; /* 3 */
+                    }
+
+                    .btn-auth:hover,
+                    .btn-auth:focus,
+                    .btn-auth:active {
+                        color: #222;
+                        text-decoration: none;
+                    }
+
+                    .btn-auth:before {
+                        content: "";
+                        float: left;
+                        width: 22px;
+                        height: 22px;
+                        background: url(../images/auth-icons.png) no-repeat 99px 99px;
+                    }
+
+                    /**
+                     * 36px
+                     */
+
+                    .btn-auth.large {
+                        height: 36px;
+                        line-height: 36px;
+                        font-size: 18px;
+                    }
+
+                    .btn-auth.large:before {
+                        width: 36px;
+                        height: 36px;
+                    }
+
+                    /*
+                     * Remove excess padding and border in FF3+
+                     */
+
+                    .btn-auth::-moz-focus-inner {
+                        border: 0;
+                        padding: 0;
+                    }
+
+                    /* Facebook (extends .btn-auth)
+                    ========================================================================== */
+
+                    .btn-facebook,
+                    .btn-facebook:visited {
+                        border-color: #29447e;
+                        border-bottom-color: #1a356e;
+                        color: #fff;
+                        background-color: #5872a7;
+                        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#637bad), to(#5872a7));
+                        background-image: -webkit-linear-gradient(#637bad, #5872a7);
+                        background-image: -moz-linear-gradient(#637bad, #5872a7);
+                        background-image: -ms-linear-gradient(#637bad, #5872a7);
+                        background-image: -o-linear-gradient(#637bad, #5872a7);
+                        background-image: linear-gradient(#637bad, #5872a7);
+                        -webkit-box-shadow: inset 0 1px 0 #879ac0;
+                        box-shadow: inset 0 1px 0 #879ac0;
+                    }
+
+                    .btn-facebook:hover,
+                    .btn-facebook:focus {
+                        color: #fff;
+                        background-color: #3b5998;
+                    }
+
+                    .btn-facebook:active {
+                        color: #fff;
+                        background: #4f6aa3;
+                        -webkit-box-shadow: inset 0 1px 0 #45619d;
+                        box-shadow: inset 0 1px 0 #45619d;
+                    }
+
+                    /*
+                     * Icon
+                     */
+
+                    .btn-facebook:before {
+                        border-right: 1px solid #465f94;
+                        margin: 0 1em 0 -1em;
+                        background-position: 0 0;
+                        
+                    }
+
+                    .btn-facebook.large:before {
+                        background-position: 0 -22px;
+                    }
+
+                    /* Twitter
+                    ========================================================================== */
+
+                    .btn-twitter,
+                    .btn-twitter:visited {
+                        border-color: #a6cde6;
+                        color: #327695;
+                        background: #cfe4f0;
+                        /* css3 */
+                        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f1f5f7), to(rgba(255, 255, 255, 0)));
+                        background-image: -webkit-linear-gradient(#f1f5f7, rgba(255, 255, 255, 0));
+                        background-image: -moz-linear-gradient(#f1f5f7, rgba(255, 255, 255, 0));
+                        background-image: -ms-linear-gradient(#f1f5f7, rgba(255, 255, 255, 0));
+                        background-image: -o-linear-gradient(#f1f5f7, rgba(255, 255, 255, 0));
+                        background-image: linear-gradient(#f1f5f7, rgba(255, 255, 255, 0));
+                        -webkit-box-shadow: inset 0 1px 0 #fff;
+                        box-shadow: inset 0 1px 0 #fff;
+                        margin-bottom: 0px;
+                    }
+
+                    .btn-twitter:hover,
+                    .btn-twitter:focus,
+                    .btn-twitter:active {
+                        color: #327695;
+                        border-color: #8dc2e4;
+                        background-color: #cadde9;
+                    }
+
+                    .btn-twitter:active {
+                        background: #cadde9;
+                        -webkit-box-shadow: inset 0 1px 0 #bbd6e7;
+                        box-shadow: inset 0 1px 0 #bbd6e7;
+                    }
+
+                    /*
+                     * Icon
+                     */
+
+                    .btn-twitter:before {
+                        margin: 0 0.6em 0 -0.6em;
+                        background-position: -22px 0;
+                    }
+
+                    .btn-twitter.large:before {
+                        background-position: -36px -22px;
+                    }
