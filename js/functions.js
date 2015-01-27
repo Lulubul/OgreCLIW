@@ -18,6 +18,16 @@ Chart.Initial = function () {
 		$('button#add_image').show();
 	});
 
+	$('.save_progress .show').on('click', function(){
+    	$('.save_progress').addClass('open');
+    	$('.save_progress .show').hide();
+    });
+
+    $('.save_progress .hide').on('click', function(){
+    	$('.save_progress').removeClass('open');
+    	$('.save_progress .show').show();
+    });
+
     $('#block-left #types_charts, #loaded_images').scrollbar();
 
     $('#block-left #left-menu').on('click', function(){

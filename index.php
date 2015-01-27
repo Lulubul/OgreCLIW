@@ -32,7 +32,7 @@
 <body>
     <div class="save_progress">
         <div class="save_progress_inner">
-            <p>Save your progress</p>
+            <p><button>Save your progress</button></p>
             <div class="hide"><img src="images/arrowU.png"></div>
             <div class="show"><img src="images/arrowD.png"></div>
         </div>
