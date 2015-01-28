@@ -84,8 +84,8 @@ Chart.Initial = function () {
 
 Chart.parseData = function() {
 	if (Chart.dataUrl){
-		if (Chart.dataUrl.search('tsv')) {
-			// console.log(Chart.dataForChart);
+		if (Chart.dataUrl.search('tsv') > 0) {
+			console.log('tsv');
 			var tsv = $.tsv.parseRows(Chart.dataForChart);
   			var colHeaders = tsv[0]; // Assuming it has a header row
   			//empty the select boxes
@@ -98,11 +98,19 @@ Chart.parseData = function() {
 			    }));
 			});
 		} 
-		else if (Chart.dataUrl.search('csv')) {
-		
+		else if (Chart.dataUrl.search('csv') > 0) {
+			console.log("csv");
+			data = $.csvIn.toJSON(Chart.dataForChart);
+			$('#x_axis, #y_axis, #order_rule, #measure_axis, #series').empty();
+			$.each(data[0], function(index, value){
+				$('#x_axis, #y_axis, #order_rule, #measure_axis, #series').append($('<option>', { 
+			        value: index,
+			        text : index 
+			    }));
+			});
 		}
-		else if (Chart.dataUrl.search('json')) {
-
+		else if (Chart.dataUrl.search('json') > 0) {
+			console.log('csv');
 		}
 	} else {
 		Chart.dataUrl = jQuery('#data_url').val();
@@ -132,9 +140,7 @@ Chart.readLocalFile = function() {
     }
 
     var file = files[0];
-    var start = 0;
-    var stop = file.size - 1;
-    Chart.dataUrl = '/data_files/'+file.name;
+    Chart.dataUrl = 'data_files/'+file.name;
     var reader = new FileReader();
 
     // If we use onloadend, we need to check the readyState.
@@ -204,8 +210,8 @@ Chart.createChart = function () {
 			console.log('csv');
 			//check if vertical
 			if (Chart.chartTypeId == "bar_vertical"){
+				console.log(Chart.dataUrl);
 				d3.csv(Chart.dataUrl, function (data) {
-				// d3.tsv(Chart.dataUrl, function (data) {
 					var myChart = new dimple.chart(svg, data);
 				 	myChart.setBounds(60, 30, Chart.chartWidth-85, Chart.chartHeight-95 );
 				 	var x = myChart.addCategoryAxis("x", Chart.xAxis);
@@ -218,8 +224,8 @@ Chart.createChart = function () {
 			} 
 			//check if horizontal
 			else if (Chart.chartTypeId == "bar_horizontal"){
+				console.log(Chart.dataUrl);
 				d3.csv(Chart.dataUrl, function (data) {
-				// d3.tsv(Chart.dataUrl, function (data) {
 					var myChart = new dimple.chart(svg, data);
 				 	myChart.setBounds(60, 30, Chart.chartWidth-85, Chart.chartHeight-95 );
 				 	myChart.addMeasureAxis("x", Chart.xAxis);
@@ -275,7 +281,6 @@ Chart.createChart = function () {
 		else if (Chart.dataUrl.search('csv') > 0){
 			console.log('csv');
 			d3.tsv(Chart.dataUrl, function (data) {
-			// d3.tsv(Chart.dataUrl, function (data) {
 				var myChart = new dimple.chart(svg, data);
 			 	myChart.setBounds(60, 30, Chart.chartWidth-85, Chart.chartHeight-95 );
 			 	myChart.addMeasureAxis("p", Chart.measureAxis);

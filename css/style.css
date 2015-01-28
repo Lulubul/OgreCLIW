@@ -604,7 +604,7 @@ a.sel {
 #loaded_images .loaded_images {
 	max-width: 75px;
 	max-height: 75px;
-	border:1 px solid transparent;
+	border:1px solid transparent;
 	margin:2px;
 }
 
