@@ -49,8 +49,8 @@
     <header id="container">
         <div id="container-body" class="clearfix">
             <div id="logo">
-                <h1 id="title">ogrE</h1>
-                <p id="subtitle">Infographics Web Editor</p>
+                <a href="index.php"><h1 id="title">ogrE</h1>
+                <p id="subtitle">Infographics Web Editor</p></a>
             </div>
         </div>
 
@@ -381,6 +381,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="part">
                         <div class="block">
                             <div class="items">
