@@ -101,15 +101,11 @@
                             </ul>
                             <ul>
                                 <li><h4>Area Charts</h4></li>
-                                <li><img class="chart_type" data-type="dimple.plot.area" id="bar_horizontal" src="images/charts/area_steps_horizontal.jpg"></li>
+                                <li><img class="chart_type" data-type="dimple.plot.area" id="bar_horizontal" src="images/charts/areas_horizontal.jpg"></li>
                             </ul>
                             <ul>
                                 <li><h4>Line Charts</h4></li>
-                                <li><img class="chart_type" id="bar_horizontal" src="images/charts/area_steps_horizontal.jpg"></li>
-                            </ul>
-                            <ul>
-                                <li><h4>Step Charts</h4></li>
-                                <li><img class="chart_type" id="bar_horizontal" src="images/charts/steps_horizontal.jpg"></li>
+                                <li><img class="chart_type" data-type="dimple.plot.line" id="bar_horizontal" src="images/charts/lines_horizontal.jpg"></li>
                             </ul>
                         </div>
                         <div class="chart_editor_block" id="chart_sets">
@@ -137,12 +133,6 @@
                                 <div>
                                     <label for="order_rule">add order rule</span>
                                     <select name="order_rule" id="order_rule" class="order_rule">
-                                        <option>Please Select ... </option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label for="series">add series</span>
-                                    <select name="series" id="series" class="series">
                                         <option>Please Select ... </option>
                                     </select>
                                 </div>

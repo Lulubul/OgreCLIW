@@ -110,7 +110,19 @@ Chart.parseData = function() {
 			});
 		}
 		else if (Chart.dataUrl.search('json') > 0) {
-			console.log('csv');
+			console.log('json');
+			$('#x_axis, #y_axis, #order_rule, #measure_axis, #series').empty();
+			// $('#series').append($('<option value="none">None</option>'));
+			data = JSON.parse(Chart.dataForChart);
+			console.log(Chart.dataForChart);
+			console.log(data);
+			$.each(data[0], function(index, value){
+				console.log(index + " " + value);
+				$('#x_axis, #y_axis, #order_rule, #measure_axis, #series').append($('<option>', { 
+			        value: index,
+			        text : index 
+			    }));
+			});
 		}
 	} else {
 		Chart.dataUrl = jQuery('#data_url').val();
@@ -168,7 +180,6 @@ Chart.createChart = function () {
 		Chart.xAxis = $('#x_axis').val();
 		Chart.yAxis = $('#y_axis').val();
 		Chart.orderRule = $('#order_rule').val();
-		Chart.series = $('#series').val() || null;
 		Chart.chartTypeId = $('.chart_type.selected').attr('id');
 		Chart.chartType.type = dimple.plot.bar
 		
@@ -185,7 +196,7 @@ Chart.createChart = function () {
 				 	x.addOrderRule(Chart.orderRule);
 				  	myChart.addMeasureAxis("y", Chart.yAxis);
 				  	var s = myChart.addSeries(null, Chart.chartType.type);
-				  	myChart.addLegend(60, 10, 500, 20, "right");
+				  	myChart.addLegend(60, 10, Chart.chartWidth - 90, 20, "right");
 				  	myChart.draw();
 				});
 			} 
@@ -240,22 +251,40 @@ Chart.createChart = function () {
 		}
 		//end csv check json
 		else if(Chart.dataUrl.search('json') > 0){
-			d3.json(data, function (data) {
-				var myChart = new dimple.chart(svg, data);
-			 	myChart.setBounds(60, 30, chartWidth-85, chartHeight-95 );
-			 	var x = myChart.addCategoryAxis("x", xAxis);
-			 	x.addOrderRule("year");
-			  	myChart.addMeasureAxis("y", yAxis);
-			  	var s = myChart.addSeries(null, chartType);
-			  	myChart.addLegend(60, 10, 500, 20, "right");
-			  	myChart.draw();
-			});
+			//check if vertical
+			if (Chart.chartTypeId == "bar_vertical"){
+				console.log(Chart.dataUrl);
+				d3.json(Chart.dataUrl, function (data) {
+					var myChart = new dimple.chart(svg, data);
+				 	myChart.setBounds(60, 30, Chart.chartWidth-85, Chart.chartHeight-95 );
+				 	var x = myChart.addCategoryAxis("x", Chart.xAxis);
+				 	x.addOrderRule(Chart.orderRule);
+				  	myChart.addMeasureAxis("y", Chart.yAxis);
+				  	var s = myChart.addSeries(null, Chart.chartType.type);
+				  	myChart.addLegend(60, 10, 500, 20, "right");
+				  	myChart.draw();
+				});
+			} 
+			//check if horizontal
+			else if (Chart.chartTypeId == "bar_horizontal"){
+				console.log(Chart.dataUrl);
+				d3.json(Chart.dataUrl, function (data) {
+					var myChart = new dimple.chart(svg, data);
+				 	myChart.setBounds(60, 30, Chart.chartWidth-85, Chart.chartHeight-95 );
+				 	myChart.addMeasureAxis("x", Chart.xAxis);
+				 	var y = myChart.addCategoryAxis("y", Chart.yAxis);
+      				y.addOrderRule(Chart.orderRule);
+				  	var s = myChart.addSeries(null, Chart.chartType.type);
+				  	myChart.addLegend(60, 10, 500, 20, "right");
+				  	myChart.draw();
+				});
+			}
+			//end check if horizontal or vertical
 		}
 		//end json
 	}//end chart type bar
 	else if (Chart.chartType.type == "dimple.plot.pie"){
 		Chart.measureAxis = $('#measure_axis').val();
-		Chart.orderRule = $('#order_rule').val();
 		Chart.series = $('#series').val();
 		Chart.chartTypeId = $('.chart_type.selected').attr('id');
 		
@@ -271,9 +300,9 @@ Chart.createChart = function () {
 			// d3.tsv(Chart.dataUrl, function (data) {
 				var myChart = new dimple.chart(svg, data);
 			 	myChart.setBounds(60, 30, Chart.chartWidth-85, Chart.chartHeight-95 );
-			 	myChart.addMeasureAxis("p", "Unit Sales");
-			  	myChart.addSeries('Owner', dimple.plot.pie);
-			  	myChart.addLegend(60, 10, 500, 20, "right");
+			 	myChart.addMeasureAxis("p", Chart.measureAxis);
+			  	myChart.addSeries(Chart.series, dimple.plot.pie);
+			  	myChart.addLegend(60, 10, Chart.chartWidth-90, 20, "right");
 			  	myChart.draw();
 			});
 		}
@@ -285,28 +314,69 @@ Chart.createChart = function () {
 			 	myChart.setBounds(60, 30, Chart.chartWidth-85, Chart.chartHeight-95 );
 			 	myChart.addMeasureAxis("p", Chart.measureAxis);
 			  	myChart.addSeries(Chart.series, dimple.plot.pie);
-			  	myChart.addLegend(60, 10, 500, 20, "right");
+			  	myChart.addLegend(60, 10, Chart.chartWidth-90, 20, "right");
 			  	myChart.draw();
 			});
 		}
 		//end csv check json
 		else if(Chart.dataUrl.search('json') > 0){
-			d3.json(data, function (data) {
+			d3.json(Chart.dataUrl, function (data) {
 				var myChart = new dimple.chart(svg, data);
-			 	myChart.setBounds(60, 30, chartWidth-85, chartHeight-95 );
-			 	var x = myChart.addCategoryAxis("x", xAxis);
-			 	x.addOrderRule("year");
-			  	myChart.addMeasureAxis("y", yAxis);
-			  	var s = myChart.addSeries(null, chartType);
-			  	myChart.addLegend(60, 10, 500, 20, "right");
+			 	myChart.setBounds(60, 30, Chart.chartWidth-85, Chart.chartHeight-95 );
+			 	myChart.addMeasureAxis("p", Chart.measureAxis);
+			  	myChart.addSeries(Chart.series, dimple.plot.pie);
+			  	myChart.addLegend(60, 10, Chart.chartWidth-90, 20, "right");
 			  	myChart.draw();
 			});
 		}
 		//end json
 	}//end chart type pie
 	else if (Chart.chartType.type == "dimmple.plot.area"){
-
+		//check if tsv
+		if (Chart.dataUrl.search('tsv') > 0) {
+			console.log('tsv');
+			d3.tsv(Chart.dataUrl, function (data) {
+				var myChart = new dimple.chart(svg, data);
+			 	myChart.setBounds(60, 30, Chart.chartWidth-85, Chart.chartHeight-95 );
+			 	var x = myChart.addCategoryAxis("x", Chart.xAxis);
+			 	x.addOrderRule(Chart.orderRule);
+			  	myChart.addMeasureAxis("y", Chart.yAxis);
+			  	var s = myChart.addSeries(null, Chart.chartType.type);
+			  	myChart.addLegend(60, 10, 500, 20, "right");
+			  	myChart.draw();
+			});
+		}
+		//end tsv check csv
+		else if (Chart.dataUrl.search('csv') > 0){
+			console.log('csv');
+			d3.csv(Chart.dataUrl, function (data) {
+				var myChart = new dimple.chart(svg, data);
+			 	myChart.setBounds(60, 30, Chart.chartWidth-85, Chart.chartHeight-95 );
+			 	var x = myChart.addCategoryAxis("x", Chart.xAxis);
+			 	x.addOrderRule(Chart.orderRule);
+			  	myChart.addMeasureAxis("y", Chart.yAxis);
+			  	var s = myChart.addSeries(null, Chart.chartType.type);
+			  	myChart.addLegend(60, 10, 500, 20, "right");
+			  	myChart.draw();
+			});
+		}
+		//end csv check json
+		else if(Chart.dataUrl.search('json') > 0){
+			d3.json(Chart.dataUrl, function (data) {
+				var myChart = new dimple.chart(svg, data);
+			 	myChart.setBounds(60, 30, Chart.chartWidth-85, Chart.chartHeight-95 );
+			 	var x = myChart.addCategoryAxis("x", Chart.xAxis);
+			 	x.addOrderRule(Chart.orderRule);
+			  	myChart.addMeasureAxis("y", Chart.yAxis);
+			  	var s = myChart.addSeries(null, Chart.chartType.type);
+			  	myChart.addLegend(60, 10, 500, 20, "right");
+			  	myChart.draw();
+			});
+		}
+		//end json
 	}//end chart type area
+	else if (Chart.chartType.type == "dimmple.plot.line"){
+	} // end type chart line
 	Items.initialization();
 }
 
