@@ -30,7 +30,14 @@ a {
 }
 
 h1 {
-	margin-bottom: 10px;
+	margin-bottom: 5px;
+}
+
+h3 {
+	font-size: 1em !important;
+	text-transform: uppercase  !important;
+	color: #666666  !important;
+	font-weight: 300 !important;
 }
 
 header {
@@ -63,17 +70,15 @@ header {
 }
 
 
-
 #mini .sideMenu{
 	display: none;
 }
 
 #title {
 	color: #FFF;
-	font-weight: 100;
+	font-weight: 300;
 	font-size: 4.5em;
 	text-transform: uppercase;
-	text-shadow: 5px 0px 0px #8FD4DC, -5px 0px 0px #AD4158;
 	margin: 10px;
 }
 
@@ -87,6 +92,7 @@ header {
 
 #container {
 	display: block;
+	height: 200px;
 }
 
 #container-body {
@@ -458,11 +464,9 @@ ul
 
 #infoMenu button, #infoMenu input 
 {
-	background: transparent;
-	border: 2px solid #1ECD97;
+    background-color: #18E698;
     letter-spacing: 1px;
     font-size: 18px;
-    font-family: 'Montserrat', sans-serif;
     transition: background-color 0.3s, color 0.3s, width 0.3s, border-width 0.3s, border-color 0.3s;
 }
 

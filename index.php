@@ -5,6 +5,8 @@
     <title>ogrE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Editor Web de infografice" />
+    <meta name="keywords" content="infographic, interaction, inspiration, web design" />
+    <meta name="author" content="OGRE" />
     <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
     <link rel="stylesheet" href="css/jquery.scrollbar.css" type="text/css" media="screen"/>
     <link rel="stylesheet" href="css/jquery-ui.css" type="text/css" media="screen"/>
@@ -21,10 +23,13 @@
     <script type="text/javascript" src="js/csvParser/jquery.csv-0.71.min.js"></script>
     <script type="text/javascript" src="js/csvParser/jquery.csvIn.min.js"></script>
     <script type="text/javascript" src="js/tsvParser/jquery.tsv-0.96.min.js"></script>
+    <script type="text/javascript" src="js/jquery.svgmagic.js"></script>
     <script type="text/javascript" src="js/functions.js"></script>
     <script type="text/javascript" src="js/jquery.scrollbar.min.js"></script>
     <script type="text/javascript" src="js/evol.colorpicker.min.js" ></script>
-    <script type="text/javascript" src="js/colorpicker.js"></script>
+    <script type="text/javascript" src="js/canvg.js"></script>
+    <script type="text/javascript" src="js/rgbcolor.js"></script>
+    <script type="text/javascript" src="js/StackBlur.js"></script>
 </script>
 
 </head>
@@ -32,9 +37,13 @@
 <body>
     <div class="save_progress">
         <div class="save_progress_inner">
-            <p><button>Save your progress</button></p>
-            <div class="hide"><img src="images/arrowU.png"></div>
-            <div class="show"><img src="images/arrowD.png"></div>
+            <button id="SaveProgress">Save your progress</button>
+            <div class="hide">
+                <img src="images/arrowU.png">
+            </div>
+            <div class="show">
+                <img src="images/arrowD.png">
+            </div>
         </div>
     </div>
     <header id="container">
@@ -44,6 +53,10 @@
                 <p id="subtitle">Infographics Web Editor</p>
             </div>
         </div>
+
+        <svg id="targetSVG" version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink">
+
+        </svg>
 
         <div class="inner-block">
             <div id="block-left">
@@ -57,13 +70,10 @@
                     <section id="infoMenu"> 
                         <ul>
                             <li>
-                                <input id="incarca">Încarcă</button>
+                                <input id="incarca">Load</button>
                             </li>
                             <li>
-                                <button id="salveaza">Salveaza</button>
-                            </li>
-                            <li>
-                                <button id="visualizeaza">Vizualizeaza</button>
+                                <button id="salveaza">Save infographic</button>
                             </li>
                         </ul>
                     </section>
@@ -192,7 +202,6 @@
         <article id="container-body">
 
             <section id="mini">
-
                     <section id="itemMenu">
                             <div id="imageEditor">
                                 <label for="amount">Alpha:</label>
@@ -333,6 +342,7 @@
             </section>
 
             <section id="infographic">
+                <div id="infoContent">
                     <div class="part">
                         <div class="block">
                             <div class="items">
@@ -349,7 +359,7 @@
 
                             <div class="hover-content">
                                 <div class="info"> 
-                                    <p> Selectați </p> 
+                                    <p> Click to select  </p> 
                                 </div>
                             </div>
 
@@ -366,7 +376,7 @@
 
                             <div class="hover-content">
                                 <div class="info"> 
-                                    <p> Selectați </p> 
+                                    <p> Click to select  </p> 
                                 </div>
                             </div>
                         </div>
@@ -381,11 +391,12 @@
 
                             <div class="hover-content">
                                 <div class="info"> 
-                                    <p> Selectați </p> 
+                                    <p> Click to select  </p> 
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </section>
         </article>
 

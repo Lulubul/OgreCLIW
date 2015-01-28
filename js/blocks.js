@@ -44,6 +44,9 @@ $( document ).ready(function() {
         MiniMenu.Change();
     });
 
+    $("#SaveProgress").click( function () {
+        MainMenu.SaveProgress();
+    });
 
     $( "#addText" ).click(function() {
         selectedBlock.find('.items').append('<div class="ui-widget draggble textItem"> <p> ' + $( "#textInput" ).val() + '</p>');
@@ -126,7 +129,7 @@ MiniMenu = {
         selectedBlock = -1;
     },
     Add: function() {
-        $('<div class="part"> <div class="block"> <div class="hover-content"> <div class="info"> <p> Selectează </p> </div></div> </div> </div>').insertAfter(selectedBlock);
+        $('<div class="part"> <div class="block"> <div class="hover-content"> <div class="info"> <p> Click to select </p> </div></div> </div> </div>').insertAfter(selectedBlock);
     },
     Settings: function(){
         var toggleWidth = $("#settingsContainer").height() == 100 ? "0px" : "100px";
@@ -146,15 +149,42 @@ MiniMenu = {
 
 MainMenu = {
     Save: function() {
-        html2canvas($("#infographic"), {
+        $("#mini").prepend($("#miniMenu"));
+        $("#mini").prepend($("#itemMenu"));
+        $('.part').css('margin-bottom','0px');
+        Items.reset();
+        $('.block .item').removeClass('active');
+        selectedBlock = -1;
+        canvg();
+        html2canvas($("#infoContent"), {
             onrendered: function(canvas) {
-                var myImage = canvas.toDataURL("image/png");
+            var myImage = canvas.toDataURL("image/png");
+
+            /*var svgimg = document.createElementNS("http://www.w3.org/2000/svg", "image");
+            svgimg.setAttributeNS("http://www.w3.org/1999/xlink", 'xlink:href', myImage);
+
+            var svgns = 'http://www.w3.org/2000/svg';
+            var xlink = 'http://www.w3.org/1999/xlink'
+            var svg = document.createElementNS(svgns, "svg");
+              $("svg").attr({ version: '1.1' , xmlns:"http://www.w3.org/2000/svg"});
+
+            var svg = $("#infoContent").html();
+            var b64 = Base64.encode(svg); // or use btoa if supported
+                
+
+
+            $("body").append($("<a href-lang='image/svg+xml' href='data:image/svg+xml;base64,\n"+b64+"' title='file.svg'>Download</a>"));
+            */
                 window.open(myImage);
+                $('.part').css('margin-bottom','20px');
             }
         });
     },
     Load: function(file) {
         alert('fisier');
+    },
+    SaveProgress: function() {
+        alert('Save');
     }
 }
 
